@@ -11,3 +11,9 @@ ln -s ~/Projects/CarbonEstimator /Applications/XAMPP/htdocs/carbon-estimator
 ```
 
 1. After that, you should be able to access the Carbon Estimator at http://localhost/carbon-estimator
+
+## Demo
+
+For a working demo, try this: http://climaterealityproject.asia/calculator
+
+Have fun!
