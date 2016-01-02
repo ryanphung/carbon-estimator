@@ -1,0 +1,93 @@
+<!--md-toolbar style="z-index: 10000;">
+  <div class="md-toolbar-tools md-whiteframe-z1 app-toolbar" style="background-color: #eeeeee;">
+    <img src="img/logo.png" class="logo"/>
+    <h3>
+      <span style="color: black;">Carbon Calculator</span>
+    </h3>
+  </div>
+</md-toolbar-->
+
+<div flex layout="row">
+    <div id="title" layout="column" flex style="background-color:#333333;">
+        <div flex layout="column" layout-align="center center" style="color: white;background-image:url('img/forest.jpg');background-size: 100% auto;">
+            <div class="title">What is your <span style="font-weight:800">Carbon Footprint</span>?</div>
+            <div class="subtitle">A simple and free tool to calculate your impact on the earth.</div>
+            <div class="subtitle">Singapore Edition, 2015</div>
+            <div style="margin-top: 30px; text-align: center;">
+                <md-button class="md-raised" ng-click="start()" style="padding: 10px 30px; font-size: 28px;">Start</md-button><br/>
+                <md-button class="" ng-click="showCredits()">Credits</md-button>
+            </div>
+        </div>
+    </div>
+    
+    <div layout="column" class="md-whiteframe-z3 card-column" ng-hide="screenState == 'initializing'" ng-class="{ {{activityGroup.type}}:true, selected: activityGroup.selected, starting: screenState == 'starting' }" ng-repeat="activityGroup in activityGroups" ng-click="selectActivityGroup(activityGroup)" ng-style="{left:activityGroup.left + 'px'}">
+        <div class="mask"></div>
+        <div class="heading">
+            <i class="material-icons" style="font-size: 32px;">{{activityGroup.icon}}</i>
+            <div style="margin-left:32px;margin-top:-32px;font-size:20px;font-weight:200;text-transform:uppercase;">{{activityGroup.type}}</div>
+        </div>
+        <div layout-padding class="card" ng-style="{height: activity.footprint * unitHeight + 'px'}" ng-class="{ {{activity.type}}:true, selected: activity.selected, zero: activity.footprint == 0, tiny: activity.footprint <= 1, small: activity.footprint <= 1.5, medium: activity.footprint <= 3}" layout layout-align="center center" ng-repeat="activity in activityGroup.activities" ng-click="selectActivity(activity, activityGroup);$event.stopPropagation();">
+            {{activity.desc}}
+        </div>
+        <div class="heading" style="margin-bottom:0px;position:absolute;bottom:10px;right:15px;left:10px;">
+            <i class="material-icons" ng-show="activityGroup.completed" style="font-size:32px;width:32px;float:left;">check_circle</i>
+			<a style="float:right;width:auto;line-height:32px;text-align:right;" ng-href="{{activityGroup.source}}" target="_blank">LEARN MORE</a>
+        </div>
+    </div>
+    
+    <div id="fullResults" layout="column" layout-align="end" ng-hide="screenState == 'initializing'" class="card-column md-whiteframe-z3 result" ng-style="{left:resultColumn.left + 'px', width:resultColumn.width + 'px'}" ng-class="{fullResults: screenState == 'results', starting: screenState == 'starting' }">
+        <!--div style="color: white;" flex>
+            <i class="material-icons" style="font-size: 64px;">nature_people</i>
+            <div style="margin-left:64px;margin-top:-64px;font-size:48px;font-weight:200;text-transform:uppercase;">RESULTS</div>
+        </div-->
+		<!--<div class="background"></div>-->
+        <div layout="row">
+            <div layout="row" flex layout-align="start start">
+                <md-button class="md-raised" ng-click="backToCalculation()" ng-show="screenState == 'results' && !takingScreenshot" style="position:absolute;top:0px;left:0px;opacity:0.8;">Back</md-button>
+            </div>
+            <div layout="row" flex layout-align="end start" style="position:absolute;top:0px;right:0px;">
+                <md-button class="md-raised md-primary" ng-click="seeFullResults()" ng-show="screenState == 'calculating' && completedGroupsCount == activityGroups.length">Done!</md-button>
+                <!--md-button class="md-raised md-primary" ng-click="seeFullResults()" ng-show="screenState == 'results'">Take  the pledge</md-button-->
+            </div>
+        </div>
+        <div layout="row" style="max-height:100%;">
+            <div layout="column" style="width:260px;overflow-y:auto;">
+                <div flex></div>
+                <div layout layout-align="center center" style="color:white;">
+                    <div class="totalFootprint">{{totalFootprint}}</div><div class="totalFootprintDesc"> tonnes of CO<sub>2</sub> per year</div>
+                </div>
+                <div layout="column">
+                    <div layout-padding class="card result" ng-style="{height: activity.footprint * unitHeight + 'px'}" ng-class="{ {{activity.type}}:true, zero: activity.footprint == 0, tiny: activity.footprint <= 1, small: activity.footprint <= 1.5, medium: activity.footprint <= 3}" layout layout-align="center center" ng-repeat="activity in selectedActivities">
+                        {{activity.desc}}
+                    </div>
+                </div>
+            </div>
+            <div layout="column" flex ng-show="screenState == 'results'">
+                <div flex layout="column" layout-padding class="wrapper">
+                    <div ng-show="totalFootprint > result.lowerBoundary && totalFootprint <= result.upperBoundary" ng-repeat="result in resultInterpretation">
+                        <div class="title">{{result.heading}}</div>
+                        <div class="subtitle"><span ng-show="userFullName">{{userFullName}}, </span><span style="font-weight:400;">{{result.message1}}</span></div>
+                        <div class="subtitle2">{{result.message2}}</div>
+                        <div id="buttonWrapper">
+                            <md-button id="fbShareBtn" class="md-raised md-primary" ng-show="!takingScreenshot" ng-click="shareResults($event)">Share on facebook</md-button>
+                            <md-button id="pledgeBtn" class="md-raised md-primary" ng-show="!takingScreenshot" href="/pledge" target="_blank">How can I improve?</md-button>
+                        </div>
+                    </div>
+                </div>
+                <div layout="row" class="baseline-wrapper">
+                    <div layout="column" flex style="margin-left:10px;" ng-repeat="baseline in baselines">
+                        <div flex></div>
+                        <div layout layout-align="center center" style="color:white;">
+                            <div class="totalFootprint">{{baseline.footprint}}</div><div class="totalFootprintDesc"> tonnes of CO<sub>2</sub> per year</div>
+                        </div>
+                        <div layout="column">
+                            <div layout-padding class="card result" ng-style="{height: baseline.footprint * unitHeight + 'px', 'background-color': baseline.chartColor, 'color': baseline.textColor}" layout layout-align="center center" style="text-transform:uppercase;font-weight:800;">
+                                {{baseline.desc}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

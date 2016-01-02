@@ -1,0 +1,11 @@
+<md-dialog ng-cloak>
+  <md-dialog-content style="max-width:800px;max-height:810px; ">
+    <div class="md-dialog-content">
+      <h2 ng-if="title" class="md-title">{{title}}</h2>
+      <p ng-if="message">{{message}}</p>
+      <div layout="row" layout-sm="column" layout-align="space-around">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+      </div>
+    </div>
+  </md-dialog-content>
+</md-dialog>

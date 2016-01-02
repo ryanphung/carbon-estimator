@@ -1,0 +1,27 @@
+{
+  "name": "CarbonCalculator",
+  "authors": [
+    "Ryan Phung <ryan.phung@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-animate": "^1.3.0 || >1.4.0-beta.0",
+    "angular-aria": "^1.3.15 || >1.4.0-beta.0",
+    "angular-material": "~0.11.0",
+    "angular-route": "~1.4.5",
+    "metrics-graphics": "~2.6.0",
+    "mg-line-brushing": "~0.0.3"
+  }
+}
