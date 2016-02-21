@@ -1,14 +1,14 @@
 'use strict';
 
-angular.module('app').controller('MainController', ['$scope', 'ServerService', 'UiBasicService', '$timeout', '$mdDialog', '$q',
-    function($scope, $server, $uiBasic, $timeout, $mdDialog, $q) {
+angular.module('app').controller('MainController', ['$scope', 'ServerService', 'UiBasicService', '$timeout', '$mdDialog', '$q', '$sanitize',
+    function($scope, $server, $uiBasic, $timeout, $mdDialog, $q, $sanitize) {
         function loadData() {
             return $q(function(resolve, reject) {
                 $server.loadData()
                 .then(function(tabletop) {
                     var groups = tabletop.sheets('Groups').all();
                     var activities = tabletop.sheets('Activities').all();
-                                            
+
                     var tempGroups = [];
                     for (var i = 0; i < groups.length; i++) {
                         groups[i].arrayId = i;
@@ -27,7 +27,7 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
                     
                     $scope.settings = [];
                     for (var i = 0; i < settings.length; i++)
-                        $scope.settings[settings['setting']] = settings['value'];
+                        $scope.settings[settings[i]['setting']] = settings[i]['value'];
                     
                     resolve();
                 }, function(tabletop) {
@@ -349,14 +349,11 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
               $mdDialog.alert()
                 .parent(angular.element(document.querySelector('#popupContainer')))
                 .clickOutsideToClose(true)
-                .title('Credits')
-                .content('<div style="text-align:center;">Special thanks to <b>Michael Broadhead</b> (<a href="http:\\earthfestsingapore.com" target="_blank">earthfestsingapore.com</a>)<br/>for the creation of the model for Carbon Footprint Calculator.</div>'
-						 // + ':<ul>' +
-                         //'<li><b>Michael Broadhead</b> (<a href="http:\\earthfestsingapore.com" target="_blank">earthfestsingapore.com</a>) for the creation of the model for Carbon Footprint Calculator.</li>' +
-                         //'<li><b>National Climate Change Secretariat</b> (<a href="http:\\www.nccs.gov.sg" target="_blank">www.nccs.gov.sg</a>) for data source.</li>' +
-                         //'</ul>'
+                .content('<div>'
+                         + $sanitize($scope.settings.credits) +
+                         '</div>'
                         )
-                .ok('Thanks!')
+                .ok('Cool!')
             );
         };
     }

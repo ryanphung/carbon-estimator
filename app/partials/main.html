@@ -1,18 +1,8 @@
-<!--md-toolbar style="z-index: 10000;">
-  <div class="md-toolbar-tools md-whiteframe-z1 app-toolbar" style="background-color: #eeeeee;">
-    <img src="img/logo.png" class="logo"/>
-    <h3>
-      <span style="color: black;">Carbon Calculator</span>
-    </h3>
-  </div>
-</md-toolbar-->
-
 <div flex layout="row">
     <div id="title" layout="column" flex style="background-color:#333333;">
         <div flex layout="column" layout-align="center center" style="color: white;background-image:url('img/forest.jpg');background-size: 100% auto;">
-            <div class="title">What is your <span style="font-weight:800">Carbon Footprint</span>?</div>
-            <div class="subtitle">A simple and free tool to calculate your impact on the earth.</div>
-            <div class="subtitle">Singapore Edition, 2015</div>
+            <div class="title" ng-bind-html="settings.pageTitle"></div>
+            <div class="subtitle" ng-bind-html="settings.pageSubtitle"></div>
             <div style="margin-top: 30px; text-align: center;">
                 <md-button class="md-raised" ng-click="start()" style="padding: 10px 30px; font-size: 28px;">Start</md-button><br/>
                 <md-button class="" ng-click="showCredits()">Credits</md-button>
