@@ -474,16 +474,13 @@ md-list-item.selected:hover .online-indicator {
 
 .card-column.result {
     background-color: #333333;
-    left: 750px;
+    left: 100%;
     cursor: default;
 }
 
 /* full results */
 #fullResults {
-    background-image: url(../img/mountain-faded.jpg);
     background-repeat: no-repeat;
-    /* background-color: rgba(0,0,0,0.4);
-    background-blend-mode: multiply; */
 }
 
 #fullResults.landscape {
@@ -495,7 +492,7 @@ md-list-item.selected:hover .online-indicator {
 }
 
 #fullResults:not(.fullResults) {
-    background-image: none;
+    background-image: none !important;
     background-color: #333333;
 }
 
