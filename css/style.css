@@ -28,7 +28,8 @@ a:hover {
 }
 
 .client-window {
-    background-color: rgb(240, 240, 240) !important;
+    background-color: #222222 !important;
+    color: white;
 }
 
 .transparent-background {
@@ -628,4 +629,26 @@ md-list-item.selected:hover .online-indicator {
     .totalFootprintDesc {
         font-size:14px;
     }
+}
+
+#main {
+    -webkit-transition: all ease 0.5s;
+    -moz-transition: all ease 0.5s;
+    -o-transition: all ease 0.5s;
+    transition: all ease 0.5s;
+}
+
+#main.initializing {
+    opacity: 0;
+}
+
+#progress md-progress-circular {
+    -webkit-transition: all ease 0.5s;
+    -moz-transition: all ease 0.5s;
+    -o-transition: all ease 0.5s;
+    transition: all ease 0.5s;
+}
+
+#progress:not(.initializing) md-progress-circular {
+    visibility: hidden;
 }

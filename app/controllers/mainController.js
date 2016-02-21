@@ -39,7 +39,7 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
         var dataPromise = loadData();
         
         dataPromise.then(function() {
-            // do nothing for now
+            $scope.screenState = 'starting';
         }, function() {
             // do nothing for now
         });
@@ -125,10 +125,6 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
             calculateColumnPositions();
             $scope.$digest();
         });
-        
-        $timeout(function() {
-            $scope.screenState = 'starting';
-        }, 500);
 
         $scope.selectedActivities = [];
         

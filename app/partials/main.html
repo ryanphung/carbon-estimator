@@ -1,4 +1,7 @@
-<div flex layout="row">
+<div id="progress" layout-fill layout="row" layout-align="center center" style="position: fixed; z-index: 0;" ng-class="screenState">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>
+<div id="main" flex layout="row" ng-class="screenState">
     <div id="title" layout="column" flex style="background-color:#333333;">
         <div flex layout="column" layout-align="center center" style="color:white;background-size:100% auto;" ng-style="{'background-image':'url('+settings.landingPageBackground+')'}">
             <div class="title" ng-bind-html="settings.pageTitle"></div>
@@ -59,7 +62,7 @@
                         <!--div class="subtitle2">{{result.message2}}</div-->
                         <div id="buttonWrapper">
                             <md-button id="fbShareBtn" class="md-raised md-primary" ng-show="!takingScreenshot" ng-click="shareResults($event)">Share on facebook</md-button>
-                            <md-button id="pledgeBtn" class="md-raised md-primary" ng-show="!takingScreenshot" href="/pledge" target="_blank">How can I improve?</md-button>
+                            <md-button ng-show="settings.linkToPledge" id="pledgeBtn" class="md-raised md-primary" ng-show="!takingScreenshot" ng-href="{{settings.linkToPledge}}" target="_blank">How can I improve?</md-button>
                         </div>
                     </div>
                 </div>
