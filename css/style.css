@@ -268,6 +268,9 @@ md-list-item.selected:hover .online-indicator {
     height: auto !important;
     padding-top: 6px;
     padding-bottom: 6px;
+    background-color: white !important;
+    border-width: 1px;
+    border-style: dashed;
 }
 .card.tiny:not(.zero) {
     font-size: 10px;
@@ -287,22 +290,23 @@ md-list-item.selected:hover .online-indicator {
 .card-column>.heading {
     margin-bottom: 20px;
 }
+.card-column {
+    background-color: white;
+}
+
+/* group specific attributes */
 
 .card.flight {
     background-color: #1976D2;
     color: white;
-}
-.card-column.flight {
-    background-color: white;
 }
 .card-column.flight>.heading,
 .card-column.flight>.heading a {
     color: #0D47A1;
 }
 .card.flight.zero {
-    background-color: white;
     color: #1976D2;
-    border: 1px dashed #1976D2;
+    border-color: #1976D2;
 }
 .card.flight.selected:not(.zero) {
     background-color: #64B5F6;
@@ -312,9 +316,6 @@ md-list-item.selected:hover .online-indicator {
     background-color: #F44336;
     color: white;
 }
-.card-column.meat {
-    background-color: white;
-}
 .card-column.meat>.heading,
 .card-column.meat>.heading a {
     color: #B71C1C;
@@ -322,18 +323,46 @@ md-list-item.selected:hover .online-indicator {
 .card.meat.zero {
     background-color: white;
     color: #F44336;
-    border: 1px dashed #F44336;
 }
 .card.meat.selected:not(.zero) {
     background-color: #EF9A9A;
 }
 
+.card.home {
+    background-color: #777777;
+    color: white;
+}
+.card-column.home>.heading,
+.card-column.home>.heading a {
+    color: #444444;
+}
+.card.home.zero {
+    color: #777777;
+    border-color: #777777;
+}
+.card.home.selected:not(.zero) {
+    background-color: #B5B5B5;
+}
+
+.card.personal {
+    background-color: #444444;
+    color: white;
+}
+.card-column.personal>.heading,
+.card-column.personal>.heading a {
+    color: #000000;
+}
+.card.personal.zero {
+    color: #444444;
+    border-color: #444444;
+}
+.card.personal.selected:not(.zero) {
+    background-color: #888888;
+}
+
 .card.transit {
     background-color: #FFA000;
     color: white;
-}
-.card-column.transit {
-    background-color: white;
 }
 .card-column.transit>.heading,
 .card-column.transit>.heading a {
@@ -342,7 +371,6 @@ md-list-item.selected:hover .online-indicator {
 .card.transit.zero {
     background-color: white;
     color: #FFA000;
-    border: 1px dashed #FFA000;
 }
 .card.transit.selected:not(.zero) {
     background-color: #FFD54F;
@@ -362,38 +390,30 @@ md-list-item.selected:hover .online-indicator {
 .card.shop.zero {
     background-color: white;
     color: #7B1FA2;
-    border: 1px dashed #7B1FA2;
 }
 .card.shop.selected:not(.zero) {
     background-color: #E1BEE7;
 }
 
-.card.investing {
+.card.finances {
     background-color: #0097A7;
     color: white;
 }
-.card-column.investing {
-    background-color: white;
-}
-.card-column.investing>.heading,
-.card-column.investing>.heading a {
+.card-column.finances>.heading,
+.card-column.finances>.heading a {
     color: #006064;
 }
-.card.investing.zero {
+.card.finances.zero {
     background-color: white;
     color: #0097A7;
-    border: 1px dashed #0097A7;
 }
-.card.investing.selected:not(.zero) {
+.card.finances.selected:not(.zero) {
     background-color: #4DD0E1;
 }
 
 .card.recreation {
     background-color: #388E3C;
     color: white;
-}
-.card-column.recreation {
-    background-color: white;
 }
 .card-column.recreation>.heading,
 .card-column.recreation>.heading a {
@@ -402,11 +422,12 @@ md-list-item.selected:hover .online-indicator {
 .card.recreation.zero {
     background-color: white;
     color: #388E3C;
-    border: 1px dashed #388E3C;
 }
 .card.recreation.selected:not(.zero) {
     background-color: #A5D6A7;
 }
+
+/* \group specific attributes */
 
 .card.result {
     margin-top: 0px;
