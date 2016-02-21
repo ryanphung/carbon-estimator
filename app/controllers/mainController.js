@@ -40,8 +40,18 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
         
         dataPromise.then(function() {
             $scope.screenState = 'starting';
-        }, function() {
-            // do nothing for now
+            console.log('Data is ready.');
+            
+            var landingImageDeferred = $q.defer();
+            var image = document.createElement('img');
+            image.src = $scope.settings.landingPageBackground;
+            image.onload = function () {
+                landingImageDeferred.resolve();
+            };
+
+            return landingImageDeferred.promise;
+        }).then(function() {
+            console.log('Image is ready.');
         });
         
         // initial values
@@ -53,7 +63,9 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
         var calculateColumnPositions = function() {
             switch ($scope.screenState) {
                 case 'initializing':
+                    break;
                 case 'starting':
+                    break;
                 case 'calculating':
                     var columnWidth = 280;
                     var columnCount = $scope.activityGroups.length;
