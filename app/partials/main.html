@@ -67,7 +67,7 @@
                     <div ng-show="totalFootprint > result.lowerBoundary && totalFootprint <= result.upperBoundary" ng-repeat="result in resultInterpretation">
                         <div class="title">{{result.heading}}</div>
                         <div class="subtitle"><span ng-show="userFullName">{{userFullName}}, </span><span style="font-weight:400;">{{result.message1}}</span></div>
-                        <div class="subtitle2">{{result.message2}}</div>
+                        <!--div class="subtitle2">{{result.message2}}</div-->
                         <div id="buttonWrapper">
                             <md-button id="fbShareBtn" class="md-raised md-primary" ng-show="!takingScreenshot" ng-click="shareResults($event)">Share on facebook</md-button>
                             <md-button id="pledgeBtn" class="md-raised md-primary" ng-show="!takingScreenshot" href="/pledge" target="_blank">How can I improve?</md-button>
