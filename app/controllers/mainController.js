@@ -1,121 +1,48 @@
 'use strict';
 
-angular.module('app').controller('MainController', ['$scope', 'ServerService', 'UiBasicService', '$timeout', '$mdDialog',
-    function($scope, $server, $uiBasic, $timeout, $mdDialog) {
-        // settings
-        $scope.resultInterpretation = [
-            {
-                lowerBoundary: -1,
-                upperBoundary: 2,
-                heading: 'Wow!',
-                message1: 'Your carbon footprint is below the sustainable footprint.',
-                message2: 'Keep it up!'
-            }, {
-                lowerBoundary: 2,
-                upperBoundary: 4,
-                heading: 'Well done!',
-                message1: 'Your carbon footprint is below the world average footprint.',
-                message2: 'Keep it up and reduce your carbon footprint further to reach the sustainable level!'
-            }, {
-                lowerBoundary: 4,
-                upperBoundary: 9,
-                heading: 'Nice.',
-                message1: 'Your carbon footprint is below the Singapore average footprint.',
-                message2: 'Keep it up and reduce your carbon footprint further to reach the sustainable level!'
-            }, {
-                lowerBoundary: 9,
-                upperBoundary: 100,
-                heading: 'Oh no...',
-                message1: 'Your carbon footprint is higher than the Singapore average footprint.',
-                message2: 'Let\'s work harder to reduce your carbon footprint!'
-            }
-        ];
-        $scope.baselines = [
-            {
-                desc: 'Singapore Average',
-                footprint: 9,
-                chartColor: '#e0e0e0',
-                textColor: '#333333'
-            },{
-                desc: 'World Average',
-                footprint: 4,
-                chartColor: '#e0e0e0',
-                textColor: '#333333'
-            },{
-                desc: 'Sustainable Footprint',
-                footprint: 2,
-                chartColor: '#388E3C',
-                textColor: 'white'
-            },
-        ];
-        $scope.unitHeight = 20; // 20 pixels for every unit
-        
-        $scope.activityGroups = [
-            {
-                type: 'flight',
-                icon: 'flight',
-                activities: [
-                    {desc: 'I avoid flying and offset my carbon', footprint: 0, type: 'flight'},
-                    {desc: 'I fly a few times in S.E. Asia', footprint: 1, type: 'flight'},
-                    {desc: 'A few flights within S.E. Asia + one yearly long distance flight', footprint: 2.5, type: 'flight'},
-                    {desc: 'A few flights within S.E. Asia and a couple long distance flights per year', footprint: 5, type: 'flight'},
-                    {desc: 'I fly short distance monthly and/or have several long distance flights per year and/or fly first class or business class', footprint: 9.5, type: 'flight'}
-                ],
-                selected: true,
-				source: 'http://www.carbonfootprint.com/'
-            }, {
-                type: 'meat',
-                icon: 'local_dining',
-                activities: [
-                    {desc: 'I\'m vegan', footprint: 1, type: 'meat'},
-                    {desc: 'I\'m vegetarian', footprint: 1.5, type: 'meat'},
-                    {desc: 'I eat white meat', footprint: 2, type: 'meat'},
-                    {desc: 'I eat all types of meat', footprint: 2.5, type: 'meat'}
-                ],
-				source: 'http://thinkprogress.org/climate/2014/06/27/3454129/eating-meat-carbon-emissions/'
-            }, {
-                type: 'transit',
-                icon: 'directions_bus',
-                activities: [
-                    {desc: 'I walk and cycle (zero carbon)', footprint: 0, type: 'transit'},
-                    {desc: 'I use public transport', footprint: 0.5, type: 'transit'},
-                    {desc: 'I drive', footprint: 3.5, type: 'transit'}
-                ],
-				source: 'http://www.lta.gov.sg/content/ltaweb/en/green-transport.html'
-            }, {
-                type: 'shop',
-                icon: 'shopping_cart',
-                activities: [
-                    {desc: 'Minimalist shopper & recycler', footprint: 0.5, type: 'shop'},
-                    {desc: 'Average shopper; concerned about buying local; recycle a bit', footprint: 1.5, type: 'shop'},
-                    {desc: 'Average shopper; NOT concerned about buying local; recycle a bit', footprint: 2.5, type: 'shop'},
-                    {desc: 'Avid shopper & recycle everything I can', footprint: 3.5, type: 'shop'},
-                    {desc: 'Avid shopper; like nice packaging; not very concerned where stuff comes from; don\'t really recycle', footprint: 9.5, type: 'shop'}
-                ],
-				source: 'http://www.carbonfootprint.com/'
-            }, {
-                type: 'investing',
-                icon: 'attach_money',
-                activities: [
-                    {desc: ' I don\'t have a bank account (zero carbon)', footprint: 0, type: 'investing'},
-                    {desc: ' I use standard banking services', footprint: 0.5, type: 'investing'}
-                ],
-				source: 'http://www.carbonfootprint.com/'
-            }, {
-                type: 'recreation',
-                icon: 'local_bar',
-                activities: [
-                    {desc: 'I only engage in zero carbon activities like running, cycling', footprint: 0, type: 'recreation'},
-                    {desc: 'I occasionally go out to bar, movies...', footprint: 1, type: 'recreation'},
-                    {desc: 'I often go out to bar, movies...', footprint: 1.5, type: 'recreation'},
-                    {desc: 'I like carbon intensive activities (like motorbiking, motorboating, ...)', footprint: 2.5, type: 'recreation'}
-                ],
-				source: 'http://www.carbonfootprint.com/'
-            }
-        ];
-        for (var i = 0; i < $scope.activityGroups.length; i++) {
-            $scope.activityGroups[i].arrayId = i;
+angular.module('app').controller('MainController', ['$scope', 'ServerService', 'UiBasicService', '$timeout', '$mdDialog', '$q',
+    function($scope, $server, $uiBasic, $timeout, $mdDialog, $q) {
+        function loadData() {
+            return $q(function(resolve, reject) {
+                $server.loadData()
+                .then(function(tabletop) {
+                    var groups = tabletop.sheets('Groups').all();
+                    var activities = tabletop.sheets('Activities').all();
+                                            
+                    var tempGroups = [];
+                    for (var i = 0; i < groups.length; i++) {
+                        groups[i].arrayId = i;
+                        groups[i].activities = [];
+                        tempGroups[groups[i].type] = groups[i];
+                    }
+                    
+                    for (var i = 0; i < activities.length; i++) {
+                        tempGroups[activities[i].type].activities.push(activities[i]);
+                    }
+                    
+                    $scope.activityGroups = groups;
+                    $scope.resultInterpretation = tabletop.sheets('Result Interpretation').all();
+                    $scope.baselines = tabletop.sheets('Baselines').all();
+                    var settings = tabletop.sheets('Settings').all();
+                    
+                    $scope.settings = [];
+                    for (var i = 0; i < settings.length; i++)
+                        $scope.settings[settings['setting']] = settings['value'];
+                    
+                    resolve();
+                }, function(tabletop) {
+                    reject('Failed to load data.');
+                });
+            });
         }
+        
+        var dataPromise = loadData();
+        
+        dataPromise.then(function() {
+            // do nothing for now
+        }, function() {
+            // do nothing for now
+        });
         
         // initial values
         $scope.screenState = 'initializing'; // initializing, starting, calculating, results
@@ -127,11 +54,6 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
             switch ($scope.screenState) {
                 case 'initializing':
                 case 'starting':
-                    $scope.resultColumn.left = window.innerWidth;
-                    for (var i = 0; i < $scope.activityGroups.length - 1; i++) {
-                        $scope.activityGroups[i].left = window.innerWidth;
-                    }
-                    break;
                 case 'calculating':
                     var columnWidth = 280;
                     var columnCount = $scope.activityGroups.length;
@@ -204,7 +126,6 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
             $scope.$digest();
         });
         
-        calculateColumnPositions();
         $timeout(function() {
             $scope.screenState = 'starting';
         }, 500);
@@ -298,7 +219,9 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
         $scope.start = function() {
             $scope.screenState = "calculating";
             
-            calculateColumnPositions();
+            dataPromise.then(function() {
+                calculateColumnPositions();
+            });
         };
         
         $scope.seeFullResults = function() {

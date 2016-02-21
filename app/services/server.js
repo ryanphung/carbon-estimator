@@ -1,8 +1,16 @@
 'use strict';
 
-angular.module('app').factory('ServerService', ['$http', 'UiBasicService', function($http, $uiBasic) {
+angular.module('app').factory('ServerService', ['$http', 'UiBasicService', '$q', 'Tabletop', function($http, $uiBasic, $q, $tabletop) {
     return {
-        listPersons: function (success, error) {
+        loadData: function() {
+            return $q(function (resolve, reject) {
+                $tabletop.then(function(data) {
+                    resolve(data[1]);
+                });
+            });
+        }
+        
+        /*listPersons: function (success, error) {
             $http.get('api/person/list.php').
                 success(function(data, status, headers, config) {
                     if (angular.isFunction(success))
@@ -44,6 +52,6 @@ angular.module('app').factory('ServerService', ['$http', 'UiBasicService', funct
                   if (angular.isFunction(error))
                     error(data, status, headers, config);
                 }); 
-        }
+        }*/
     };
 }]);
