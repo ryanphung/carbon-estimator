@@ -39,7 +39,6 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
         var dataPromise = loadData();
         
         dataPromise.then(function() {
-            $scope.screenState = 'starting';
             console.log('Data is ready.');
             
             var landingImageDeferred = $q.defer();
@@ -48,10 +47,15 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
             image.onload = function () {
                 landingImageDeferred.resolve();
             };
+            
+            var image2 = document.createElement('img');
+            image2.src = $scope.settings.resultsPageBackground;
 
             return landingImageDeferred.promise;
         }).then(function() {
             console.log('Image is ready.');
+            
+            $scope.screenState = 'starting';
         });
         
         // initial values
