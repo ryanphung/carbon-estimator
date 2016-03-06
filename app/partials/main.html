@@ -76,7 +76,7 @@
                                 <span ng-if="!isPhonePortrait">Share on facebook</span>
                                 <span ng-if="isPhonePortrait">Share</span>
                             </md-button>
-                            <md-button ng-show="settings.linkToPledge" id="pledgeBtn" class="md-raised md-primary" ng-show="!takingScreenshot" ng-href="{{settings.linkToPledge}}" target="_blank">
+                            <md-button ng-show="settings.linkToPledge && !takingScreenshot" id="pledgeBtn" class="md-raised md-primary" ng-href="{{settings.linkToPledge}}" target="_blank">
                                 <span ng-if="!isPhonePortrait">How can I improve?</span>
                                 <span ng-if="isPhonePortrait">Learn</span>
                             </md-button>

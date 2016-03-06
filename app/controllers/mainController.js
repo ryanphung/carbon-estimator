@@ -301,68 +301,70 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
                         } else
                             console.error(response.error.message);
             
-                        html2canvas(element, {
-                            onrendered: function(canvas) {
-                                $scope.takingScreenshot = false;
-                                $scope.$digest();
-                                
-                                var imgData = canvas.toDataURL();
-            
-                                $mdDialog.show({
-                                    controller: ShareDialogController,
-                                    templateUrl: 'app/partials/shareDialog.tmpl.html',
-                                    parent: angular.element(document.body),
-                                    targetEvent: ev,
-                                    clickOutsideToClose: true,
-                                    locals: { fbImage: imgData }
-                                })
-                                .then(function(fbStatusMessage) {
-                                    // login
-            
-                                    imgData = imgData.replace(/^data:image\/(png|jpe?g);base64,/, '');
-                                    // convert the base64 string to string containing the binary data
-                                    imgData = conversions.base64ToString(imgData);
-                                    
+                        setTimeout(function() {
+                            html2canvas(element, {
+                                onrendered: function(canvas) {
+                                    $scope.takingScreenshot = false;
+                                    $scope.$digest();
+
+                                    var imgData = canvas.toDataURL();
+
                                     $mdDialog.show({
-                                        controller: ProgressDialogController,
-                                        templateUrl: 'app/partials/progressDialog.tmpl.html',
+                                        controller: ShareDialogController,
+                                        templateUrl: 'app/partials/shareDialog.tmpl.html',
                                         parent: angular.element(document.body),
-                                        /*targetEvent: ev,*/
-                                        locals: { title: 'Sharing Image To Facebook...', message: 'Please do not close the window; it may takes a few seconds to a few minutes depending on your network connection.' }
-                                    });
-									
-                                    postImage({
-                                        fb: { // data to be sent to FB
-                                            caption: fbStatusMessage,
-                                            // place any other API params you wish to send. Ex: place / tags etc.
-                                            accessToken: FB_ACCESS_TOKEN,
-                                            file: {
-                                              name: 'File Name.jpg',
-                                              type: 'image/jpeg', // or png
-                                              dataString: imgData
-                                            }
-                                        },
-                                        call: { // options of the $.ajax call
-                                            url: 'https://graph.facebook.com/me/photos', // or replace *me* with albumid
-                                            success: function() {
-                                                $mdDialog.show(
-                                                  $mdDialog.alert()
-                                                    .parent(angular.element(document.querySelector('#popupContainer')))
-                                                    .clickOutsideToClose(true)
-                                                    .title('Share successully.')
-                                                    .content('The result has been shared to your facebook wall.')
-                                                    .ok('Got it!')
-                                                    .targetEvent(ev)
-                                                );
+                                        targetEvent: ev,
+                                        clickOutsideToClose: true,
+                                        locals: { fbImage: imgData }
+                                    })
+                                    .then(function(fbStatusMessage) {
+                                        // login
+
+                                        imgData = imgData.replace(/^data:image\/(png|jpe?g);base64,/, '');
+                                        // convert the base64 string to string containing the binary data
+                                        imgData = conversions.base64ToString(imgData);
+
+                                        $mdDialog.show({
+                                            controller: ProgressDialogController,
+                                            templateUrl: 'app/partials/progressDialog.tmpl.html',
+                                            parent: angular.element(document.body),
+                                            /*targetEvent: ev,*/
+                                            locals: { title: 'Sharing Image To Facebook...', message: 'Please do not close the window; it may takes a few seconds to a few minutes depending on your network connection.' }
+                                        });
+
+                                        postImage({
+                                            fb: { // data to be sent to FB
+                                                caption: fbStatusMessage,
+                                                // place any other API params you wish to send. Ex: place / tags etc.
+                                                accessToken: FB_ACCESS_TOKEN,
+                                                file: {
+                                                  name: 'File Name.jpg',
+                                                  type: 'image/jpeg', // or png
+                                                  dataString: imgData
+                                                }
                                             },
-                                            error: function() {
-                                                console.error('failed');
+                                            call: { // options of the $.ajax call
+                                                url: 'https://graph.facebook.com/me/photos', // or replace *me* with albumid
+                                                success: function() {
+                                                    $mdDialog.show(
+                                                      $mdDialog.alert()
+                                                        .parent(angular.element(document.querySelector('#popupContainer')))
+                                                        .clickOutsideToClose(true)
+                                                        .title('Share successully.')
+                                                        .content('The result has been shared to your facebook wall.')
+                                                        .ok('Got it!')
+                                                        .targetEvent(ev)
+                                                    );
+                                                },
+                                                error: function() {
+                                                    console.error('failed');
+                                                }
                                             }
-                                        }
+                                        });
                                     });
-                                });
-                            }
-                        });
+                                }
+                            });
+                        }, 500);
                     });
                 }, function() {
                     // login failed
