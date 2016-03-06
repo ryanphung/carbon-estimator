@@ -63,83 +63,6 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
 }
 
 
-/* avatar */
-
-md-card .md-avatar {
-    width: 70px;
-    height: 70px;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    margin-right: 8px;
-    border-radius: 50%;
-    box-sizing: content-box;
-}
-
-
-/* \avatar */
-
-
-/* app toolbar */
-
-
-/*.app-toolbar {
-    background-color: white;
-    color: black;
-}*/
-
-
-/* \app toolbar */
-
-
-/* charts */
-
-#chart {
-    width: 100%;
-    height: 400px;
-    padding-bottom: 20px;
-}
-
-
-/* \charts */
-
-
-/* logo */
-
-.logo {
-    width: 40px;
-    height: auto;
-    margin-right: 10px;
-}
-
-
-/* \logo */
-
-
-/* online-indicator */
-
-.online-indicator {
-    border-radius: 50%;
-    width: 10px;
-    height: 10px;
-    background-color: #cddc39;
-    -webkit-transition: all cubic-bezier(0.25, 0.8, 0.25, 1) 0.4s;
-    -moz-transition: all cubic-bezier(0.25, 0.8, 0.25, 1) 0.4s;
-    -o-transition: all cubic-bezier(0.25, 0.8, 0.25, 1) 0.4s;
-    transition: all cubic-bezier(0.25, 0.8, 0.25, 1) 0.4s;
-}
-
-md-list-item.selected .online-indicator {
-    background-color: #cddc39;
-}
-
-md-list-item.selected:hover .online-indicator {
-    background-color: #cddc39;
-}
-
-
-/* \online-indicator */
-
-
 /* background color */
 
 .background-light-green {
@@ -296,11 +219,10 @@ md-list-item.selected:hover .online-indicator {
     overflow: hidden;
     text-align: center;
     cursor: pointer;
-    -webkit-transition: all cubic-bezier(0.25, 0.8, 0.25, 1) 0.6s;
-    -moz-transition: all cubic-bezier(0.25, 0.8, 0.25, 1) 0.6s;
-    -o-transition: all cubic-bezier(0.25, 0.8, 0.25, 1) 0.6s;
-    transition: all cubic-bezier(0.25, 0.8, 0.25, 1) 0.6s;
-    transition: all ease 0.6s;
+    -webkit-transition: left ease 0.6s, -webkit-transform ease 0.6s, background-color ease 0.6s;
+    -moz-transition: left ease 0.6s, transform ease 0.6s, background-color ease 0.6s;
+    -o-transition: left ease 0.6s, transform ease 0.6s, background-color ease 0.6s;
+    transition: left ease 0.6s, transform ease 0.6s, -ms-transform ease 0.6s, background-color ease 0.6s;
     text-transform: uppercase;
     padding-top: 0px;
     padding-bottom: 0px;
@@ -433,15 +355,22 @@ md-list-item.selected:hover .online-indicator {
     width: 280px;
     height: 100%;
     background-color: white;
-    -webkit-transition: all cubic-bezier(0.25, 0.8, 0.25, 1) 0.8s;
-    -moz-transition: all cubic-bezier(0.25, 0.8, 0.25, 1) 0.8s;
-    -o-transition: all cubic-bezier(0.25, 0.8, 0.25, 1) 0.8s;
-    transition: all cubic-bezier(0.25, 0.8, 0.25, 1) 0.8s;
+    -webkit-transition: left ease 0.8s;
+    -moz-transition: left ease 0.8s;
+    -o-transition: left ease 0.8s;
+    transition: left ease 0.8s;
+    box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.2), 0px 7px 10px 1px rgba(0, 0, 0, 0.14), 0px 2px 16px 1px rgba(0, 0, 0, 0.12);
 }
 
 @media (max-width: 700px) {
     .card-column {
         width: calc(100% - 60px);
+        border-left: 1px solid #e0e0e0;
+        box-shadow: none;
+    }
+    
+    #results.card-column {
+        border: none;
     }
 }
 
@@ -459,13 +388,11 @@ md-list-item.selected:hover .online-indicator {
     height: 100%;
     margin: -10px;
     background-color: white;
-    filter: alpha(opacity=80);
-    -moz-opacity: 0.8;
     opacity: 0.8;
-    -webkit-transition: all cubic-bezier(0.25, 0.8, 0.25, 1) 0.6s;
-    -moz-transition: all cubic-bezier(0.25, 0.8, 0.25, 1) 0.6s;
-    -o-transition: all cubic-bezier(0.25, 0.8, 0.25, 1) 0.6s;
-    transition: all cubic-bezier(0.25, 0.8, 0.25, 1) 0.6s;
+    -webkit-transition: opacity ease 0.6s, visibility ease 0.6s;
+    -moz-transition: opacity ease 0.6s, visibility ease 0.6s;
+    -o-transition: opacity ease 0.6s, visibility ease 0.6s;
+    transition: opacity ease 0.6s, visibility ease 0.6s;
 }
 
 .card-column.selected>.mask {
@@ -504,6 +431,10 @@ md-list-item.selected:hover .online-indicator {
     width: 280px;
     background-repeat: no-repeat;
     background-color: #333333;
+    -webkit-transition: left ease 0.8s, width ease 0.8s;
+    -moz-transition: left ease 0.8s, width ease 0.8s;
+    -o-transition: left ease 0.8s, width ease 0.8s;
+    transition: left ease 0.8s, width ease 0.8s;
 }
 
 #results .result-background {
@@ -563,7 +494,7 @@ md-list-item.selected:hover .online-indicator {
     margin-left: 5px;
     display: none;
     text-transform: uppercase;
-    font-size: 12px;
+    font-size: 10px;
 }
 
 #results .baseline {
@@ -754,15 +685,16 @@ md-list-item.selected:hover .online-indicator {
 }
 
 #main {
-    -webkit-transition: all ease 0.5s;
-    -moz-transition: all ease 0.5s;
-    -o-transition: all ease 0.5s;
-    transition: all ease 0.5s;
+    -webkit-transition: opacity ease 0.5s;
+    -moz-transition: opacity ease 0.5s;
+    -o-transition: opacity ease 0.5s;
+    transition: opacity ease 0.5s;
     opacity: 1;
 }
 
 #main.initializing {
     opacity: 0;
+    visibility: hidden;
 }
 
 #progress {
@@ -775,6 +707,7 @@ md-list-item.selected:hover .online-indicator {
 }
 
 #progress:not(.initializing) md-progress-circular {
+    display: none;
     visibility: hidden;
     opacity: 0;
 }
@@ -792,10 +725,10 @@ md-list-item.selected:hover .online-indicator {
     opacity: 0;
     background-color: rgba(0, 0, 0, 0.2);
     visibility: hidden;
-    -webkit-transition: all ease 0.6s;
-    -moz-transition: all ease 0.6s;
-    -o-transition: all ease 0.6s;
-    transition: all ease 0.6s;
+    -webkit-transition: opacity ease 0.6s;
+    -moz-transition: opacity ease 0.6s;
+    -o-transition: opacity ease 0.6s;
+    transition: opacity ease 0.6s;
     cursor: pointer;
 }
 

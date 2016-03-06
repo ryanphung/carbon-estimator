@@ -2,6 +2,7 @@
 
 angular.module('app').controller('MainController', ['$scope', 'ServerService', 'UiBasicService', '$timeout', '$mdDialog', '$q', '$sanitize', '$window',
     function($scope, $server, $uiBasic, $timeout, $mdDialog, $q, $sanitize, $window) {
+        $scope.titleShown = true;
         $scope.isPhonePortrait = $window.innerWidth <= 568;
         
         function loadData() {
@@ -267,6 +268,11 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
             dataPromise.then(function() {
                 calculateColumnPositions();
             });
+            
+            setTimeout(function() {
+                $scope.titleShown = false;
+                $scope.$digest();
+            }, 1000);
         };
         
         $scope.seeFullResults = function() {
