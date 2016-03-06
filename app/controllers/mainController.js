@@ -43,6 +43,8 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
         dataPromise.then(function() {
             console.log('Data is ready.');
             
+            $scope.selectActivityGroup($scope.activityGroups[0]);
+            
             var landingImageDeferred = $q.defer();
             var image = document.createElement('img');
             image.src = $scope.settings.landingPageBackground;
@@ -72,16 +74,37 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
                 case 'starting':
                     break;
                 case 'calculating':
-                    var columnWidth = 280;
-                    var columnCount = $scope.activityGroups.length;
-                    var remainingWidth = $window.innerWidth - columnWidth;
-                    var collapsedColumnWidth = Math.round((remainingWidth - columnWidth) / (columnCount - 1));
-                    $scope.activityGroups[0].left = 0;
-                    for (var i = 0; i < $scope.activityGroups.length - 1; i++) {
-                        if (!$scope.activityGroups[i].selected)
-                            $scope.activityGroups[i + 1].left = $scope.activityGroups[i].left + collapsedColumnWidth;
-                        else
-                            $scope.activityGroups[i + 1].left = $scope.activityGroups[i].left + columnWidth;
+                    var columnWidth,
+                        columnCount = $scope.activityGroups.length,
+                        remainingWidth;
+                    
+                    if (!$scope.isPhonePortrait) {
+                        columnWidth = 280;
+                        remainingWidth = $window.innerWidth - columnWidth;
+                        
+                        var collapsedColumnWidth = Math.round((remainingWidth - columnWidth) / (columnCount - 1));
+                        $scope.activityGroups[0].left = 0;
+                        for (var i = 0; i < $scope.activityGroups.length - 1; i++) {
+                            if (!$scope.activityGroups[i].selected)
+                                $scope.activityGroups[i + 1].left = $scope.activityGroups[i].left + collapsedColumnWidth;
+                            else
+                                $scope.activityGroups[i + 1].left = $scope.activityGroups[i].left + columnWidth;
+                        }
+                    } else {
+                        columnWidth = $window.innerWidth - 60;
+                        remainingWidth = columnWidth;
+                        
+                        var i;
+                        for (i = 0; i < $scope.activityGroups.length; i++) {
+                            $scope.activityGroups[i].left = 0;
+                            if ($scope.activityGroups[i].selected)
+                                break;
+                        }
+                        
+                        i++;
+                        for (i; i < $scope.activityGroups.length; i++) {
+                            $scope.activityGroups[i].left = ($window.innerWidth + 40);
+                        }
                     }
                     break;
                 case 'results':
@@ -132,6 +155,7 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
         }
         
         $(window).resize(function() {
+            $scope.isPhonePortrait = $window.innerWidth <= 568;
             calculateColumnPositions();
             $scope.$digest();
         });
@@ -188,14 +212,23 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
             }
 
             if (activityGroup.arrayId < ($scope.activityGroups.length - 1) && !$scope.activityGroups[activityGroup.arrayId + 1].completed)
-                doNextStep();
+                $scope.doNextStep();
         };
         
-        var doNextStep = function() {
+        $scope.doNextStep = function() {
             var id = findSelectedActivityGroupId();
             if (id != null) {
-                if (id < $scope.activityGroups.length) {
+                if (id < $scope.activityGroups.length - 1) {
                     $scope.selectActivityGroup($scope.activityGroups[id + 1]);
+                }
+            }
+        };
+        
+        $scope.doPrevStep = function() {
+            var id = findSelectedActivityGroupId();
+            if (id != null) {
+                if (id > 0) {
+                    $scope.selectActivityGroup($scope.activityGroups[id - 1]);
                 }
             }
         };
@@ -220,6 +253,10 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
             activity.selected = false;
             
             $scope.totalFootprint -= activity.footprint;
+        };
+        
+        $scope.swipeLeft = function() {
+            console.log('swipe');
         };
         
         $scope.start = function() {
