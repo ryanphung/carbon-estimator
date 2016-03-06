@@ -1,7 +1,9 @@
 'use strict';
 
-angular.module('app').controller('MainController', ['$scope', 'ServerService', 'UiBasicService', '$timeout', '$mdDialog', '$q', '$sanitize',
-    function($scope, $server, $uiBasic, $timeout, $mdDialog, $q, $sanitize) {
+angular.module('app').controller('MainController', ['$scope', 'ServerService', 'UiBasicService', '$timeout', '$mdDialog', '$q', '$sanitize', '$window',
+    function($scope, $server, $uiBasic, $timeout, $mdDialog, $q, $sanitize, $window) {
+        $scope.isPhonePortrait = $window.innerWidth <= 568;
+        
         function loadData() {
             return $q(function(resolve, reject) {
                 $server.loadData()
@@ -74,7 +76,7 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
                     var columnWidth = 280;
                     var columnCount = $scope.activityGroups.length;
                     $scope.resultColumn.width = columnWidth;
-                    $scope.resultColumn.left = window.innerWidth - $scope.resultColumn.width;
+                    $scope.resultColumn.left = $window.innerWidth - $scope.resultColumn.width;
                     var remainingWidth = $scope.resultColumn.left;
                     var collapsedColumnWidth = Math.round((remainingWidth - columnWidth) / (columnCount - 1));
                     $scope.activityGroups[0].left = 0;
@@ -87,7 +89,7 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
                     break;
                 case 'results':
                     $scope.resultColumn.left = 0;
-                    $scope.resultColumn.width = window.innerWidth;
+                    $scope.resultColumn.width = $window.innerWidth;
                     for (var i = 0; i < $scope.activityGroups.length; i++) {
                         $scope.activityGroups[i].left = 0;
                     }
@@ -96,18 +98,18 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
             
             // calculate background image size
             
-            var fullResultsEl = document.getElementById('fullResults');
+            var main = document.getElementById('main');
 
-            if (window.innerWidth / window.innerHeight > 4896 / 3264) {
-                fullResultsEl.classList.remove('portrait');
-                fullResultsEl.classList.add('landscape');
+            if ($window.innerWidth / $window.innerHeight > 4896 / 3264) {
+                main.classList.remove('portrait');
+                main.classList.add('landscape');
             } else {
-                fullResultsEl.classList.remove('landscape');
-                fullResultsEl.classList.add('portrait');
+                main.classList.remove('landscape');
+                main.classList.add('portrait');
             }
         }
         
-        if (window.innerWidth < 568) {
+        if ($scope.isPhonePortrait) {
             $mdDialog.show(
               $mdDialog.alert()
                 .parent(angular.element(document.querySelector('#popupContainer')))

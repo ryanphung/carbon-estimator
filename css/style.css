@@ -333,7 +333,7 @@ md-list-item.selected:hover .online-indicator {
     transform: scale(1.05, 1.05);
 }
 
-#fullResults.card-column .card:hover {
+#results.card-column .card:hover {
     -ms-transform: none;
     -webkit-transform: none;
     transform: none;
@@ -377,6 +377,7 @@ md-list-item.selected:hover .online-indicator {
 
 .card-column {
     background-color: white;
+    width: 280px;
 }
 
 .card-column>.heading {
@@ -626,49 +627,78 @@ md-list-item.selected:hover .online-indicator {
 
 .card-column.result {
     background-color: #333333;
-    left: 100%;
     cursor: default;
 }
 
+@media (max-width: 568px) {
+    .card-column.result {
+        visibility: hidden;
+    }
+}
 
-/* full results */
+/* results */
 
-#fullResults {
+#results {
+    width: 100%;
     background-repeat: no-repeat;
-}
-
-#fullResults.landscape {
-    background-size: 100% auto;
-}
-
-#fullResults.portrait {
-    background-size: auto 100%;
-}
-
-#fullResults:not(.fullResults) {
-    background-image: none !important;
     background-color: #333333;
 }
 
-#fullResults .wrapper {
+#results .result-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    z-index: 0;
+    -webkit-transition: opacity ease 0.5s;
+    -moz-transition: opacity ease 0.5s;
+    -o-transition: opacity ease 0.5s;
+    transition: opacity ease 0.5s;
+}
+
+#main.initializing #results,
+#main.starting #results {
+    right: -100%;
+}
+
+#main.calculating #results {
+    right: calc(280px - 100%);
+}
+
+#main.results #results {
+    right: 0px;
+    width: 100%;
+}
+
+#main.results #results .result-background {
+    opacity: 0.6;
+}
+
+#results .result-background {
+    background-size: cover;
+}
+
+#results .wrapper {
     color: white;
     position: absolute;
     top: 10px;
 }
 
-#fullResults .baseline-wrapper {
+#results .baseline-wrapper {
     position: absolute;
     left: 270px;
     right: 10px;
     bottom: 10px;
 }
 
-#fullResults .baseline-wrapper .card.result {
+#results .baseline-wrapper .card.result {
     text-transform: uppercase;
     font-weight: 800;
 }
 
-#fullResults .title {
+#results .title {
     font-weight: 800;
     font-size: 100px;
     line-height: 110px;
@@ -677,7 +707,7 @@ md-list-item.selected:hover .online-indicator {
     text-align: right;
 }
 
-#fullResults .subtitle {
+#results .subtitle {
     font-weight: 800;
     font-size: 40px;
     text-transform: uppercase;
@@ -686,7 +716,7 @@ md-list-item.selected:hover .online-indicator {
     text-align: right;
 }
 
-#fullResults .subtitle2 {
+#results .subtitle2 {
     font-weight: 200;
     font-size: 32px;
     line-height: 36px;
@@ -694,8 +724,20 @@ md-list-item.selected:hover .online-indicator {
     text-align: right;
 }
 
-#fullResults #buttonWrapper {
+#results #buttonWrapper {
     position: relative;
+}
+
+#results .result-card-container {
+    width: 260px;
+    overflow-y: auto;
+    z-index: 100;
+}
+
+#results .result-button-container {
+    top: 10px;
+    position: absolute;
+    width: 260px;
 }
 
 
@@ -703,7 +745,8 @@ md-list-item.selected:hover .online-indicator {
 
 #title .title-background {
     color: white;
-    background-size: 100% auto;
+    background-size: cover;
+    padding: 30px;
 }
 
 #title .title {
@@ -728,6 +771,18 @@ md-list-item.selected:hover .online-indicator {
 #title .start-button {
     padding: 10px 30px;
     font-size: 1.7em;
+}
+
+@media (max-width: 568px) {
+    #title .title {
+        font-size: 2em;
+        line-height: 1em;
+        margin-bottom: 0.7em;
+    }
+    #title .subtitle {
+        font-size: 1.2em;
+        line-height: 1.2em;
+    }
 }
 
 
@@ -763,18 +818,18 @@ md-list-item.selected:hover .online-indicator {
 }
 
 @media (max-width: 700px) {
-    #fullResults .wrapper {
+    #results .wrapper {
         margin-bottom: -50px;
     }
-    #fullResults .title {
+    #results .title {
         font-size: 40px;
         line-height: 50px;
     }
-    #fullResults .subtitle {
+    #results .subtitle {
         font-size: 16px;
         line-height: 20px;
     }
-    #fullResults .subtitle2 {
+    #results .subtitle2 {
         font-size: 14px;
         line-height: 16px;
     }
@@ -784,14 +839,6 @@ md-list-item.selected:hover .online-indicator {
     #pledgeBtn {
         top: 40px;
         right: 0;
-    }
-    #title .title {
-        font-size: 24px;
-        line-height: 32px;
-    }
-    #title .subtitle {
-        font-size: 16px;
-        line-height: 24px;
     }
     .totalFootprint {
         font-size: 40px;
