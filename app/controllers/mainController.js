@@ -276,8 +276,10 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
         };
         
         $scope.seeFullResults = function() {
-            $scope.screenState = "results";
-            calculateColumnPositions();
+            if ($scope.completedGroupsCount == $scope.activityGroups.length) {
+                $scope.screenState = "results";
+                calculateColumnPositions();
+            }
         }
         
         $scope.backToCalculation = function() {

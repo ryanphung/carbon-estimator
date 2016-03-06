@@ -500,10 +500,7 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
 }
 
 #results .mobile-baseline-desc {
-    margin-left: 5px;
     display: none;
-    text-transform: uppercase;
-    font-size: 10px;
 }
 
 #results .baseline {
@@ -512,7 +509,7 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
 
 @media (max-width: 700px) {
     #results .baseline-wrapper {
-        left: 205px;
+        left: 0;
         display: block;
         height: 100%;
     }
@@ -524,15 +521,25 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
     }
     #results .baseline-wrapper .baseline .baseline-card {
         background-color: transparent !important;
-        border-top: 2px solid white;
+        border-top: 2px dashed white;
         border-radius: 0;
         color: transparent !important;
     }
     #results .totalFootprint {
+        text-align: right;
         font-size: 32px;
     }
     #results .mobile-baseline-desc {
-        display: inline-block;
+        display: block;
+        float: right;
+        margin-right: 5px;
+        margin-top: 20px;
+        text-transform: uppercase;
+        font-size: 12px;
+    }
+    
+    #results .baseline-total-footprint-amount {
+        float: right;
     }
 }
 
@@ -580,7 +587,7 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
 
 @media (max-width: 700px) {
     #results .result-card-container {
-        width: 200px;
+        width: 150px;
     }
 }
 
@@ -588,7 +595,7 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
     top: 10px;
     position: absolute;
     width: 260px;
-    z-index: 200;
+    z-index: 2300;
 }
 
 
@@ -673,8 +680,8 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
         margin-bottom: -50px;
     }
     #results .title {
-        font-size: 40px;
-        line-height: 50px;
+        font-size: 32px;
+        line-height: 36px;
     }
     #results .subtitle {
         font-size: 16px;

@@ -40,7 +40,7 @@
         </div>
     </div>
     <div id="results" layout="column" layout-align="end" ng-hide="screenState == 'initializing'" class="card-column" ng-click="seeFullResults()">
-        <div class="result-background" ng-if="!isPhonePortrait" ng-style="{'background-image':'url('+settings.resultsPageBackground+')'}"></div>
+        <div class="result-background" ng-style="{'background-image':'url('+settings.resultsPageBackground+')'}"></div>
         <div layout="row" class="result-button-container">
             <div layout="row" flex layout-align="start start">
                 <md-button class="md-raised" ng-click="backToCalculation(); $event.stopPropagation();" ng-show="screenState == 'results' && !takingScreenshot" style="position:absolute;top:0px;left:0px;opacity:0.8;">Back</md-button>
@@ -61,7 +61,8 @@
                          layout layout-align="center center" 
                          ng-class="{zero: activity.footprint == 0}"
                          ng-repeat="activity in selectedActivities">
-                        {{activity.desc}}
+                        <span ng-if="!isPhonePortrait">{{activity.desc}}</span>
+                        <span ng-if="isPhonePortrait">{{activity.type}}</span>
                     </div>
                 </div>
             </div>
@@ -71,8 +72,14 @@
                         <div class="title">{{result.heading}}</div>
                         <div class="subtitle"><span ng-show="userFullName">{{userFullName}}, </span><span style="font-weight:400;">{{result.message1}}</span></div>
                         <div id="buttonWrapper" style="z-index: 2100;">
-                            <md-button id="fbShareBtn" class="md-raised md-primary" ng-show="!takingScreenshot" ng-click="shareResults($event)">Share on facebook</md-button>
-                            <md-button ng-show="settings.linkToPledge" id="pledgeBtn" class="md-raised md-primary" ng-show="!takingScreenshot" ng-href="{{settings.linkToPledge}}" target="_blank">How can I improve?</md-button>
+                            <md-button id="fbShareBtn" class="md-raised md-primary" ng-show="!takingScreenshot" ng-click="shareResults($event)">
+                                <span ng-if="!isPhonePortrait">Share on facebook</span>
+                                <span ng-if="isPhonePortrait">Share</span>
+                            </md-button>
+                            <md-button ng-show="settings.linkToPledge" id="pledgeBtn" class="md-raised md-primary" ng-show="!takingScreenshot" ng-href="{{settings.linkToPledge}}" target="_blank">
+                                <span ng-if="!isPhonePortrait">How can I improve?</span>
+                                <span ng-if="isPhonePortrait">Learn</span>
+                            </md-button>
                         </div>
                     </div>
                 </div>
@@ -80,7 +87,10 @@
                     <div class="baseline" layout="column" style="margin-left:10px;" ng-repeat="baseline in baselines">
                         <div flex></div>
                         <div>
-                            <div class="totalFootprint">{{baseline.footprint}}<span class="totalFootprintDesc"> tonnes of CO<sub>2</sub> per year</span><span class="mobile-baseline-desc">{{baseline.desc}}</span></div>
+                            <div class="totalFootprint">
+                                <div class="baseline-total-footprint-amount">{{baseline.footprint}}<span class="totalFootprintDesc"> tonnes of CO<sub>2</sub> per year</span></div>
+                                <div class="mobile-baseline-desc">{{baseline.desc}}</div>
+                            </div>
                         </div>
                         <div layout="column">
                             <div layout-padding class="card result baseline-card" ng-style="{height: baseline.footprint * settings.unitHeight + 'px', 'background-color': baseline.chartcolor, 'color': baseline.textcolor}" layout layout-align="center center">
