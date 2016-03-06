@@ -63,7 +63,6 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
         // initial values
         $scope.screenState = 'initializing'; // initializing, starting, calculating, results
         $scope.totalFootprint = 0;
-        $scope.resultColumn = {};
         $scope.completedGroupsCount = 0;
         
         var calculateColumnPositions = function() {
@@ -75,9 +74,7 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
                 case 'calculating':
                     var columnWidth = 280;
                     var columnCount = $scope.activityGroups.length;
-                    $scope.resultColumn.width = columnWidth;
-                    $scope.resultColumn.left = $window.innerWidth - $scope.resultColumn.width;
-                    var remainingWidth = $scope.resultColumn.left;
+                    var remainingWidth = $window.innerWidth - columnWidth;
                     var collapsedColumnWidth = Math.round((remainingWidth - columnWidth) / (columnCount - 1));
                     $scope.activityGroups[0].left = 0;
                     for (var i = 0; i < $scope.activityGroups.length - 1; i++) {
@@ -88,11 +85,6 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
                     }
                     break;
                 case 'results':
-                    $scope.resultColumn.left = 0;
-                    $scope.resultColumn.width = $window.innerWidth;
-                    for (var i = 0; i < $scope.activityGroups.length; i++) {
-                        $scope.activityGroups[i].left = 0;
-                    }
                     break;
             }
             

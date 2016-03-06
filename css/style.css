@@ -371,8 +371,12 @@ md-list-item.selected:hover .online-indicator {
 
 /* card column */
 
-.starting .card-column {
+#main.starting .card-column {
     left: 100%;
+}
+
+#main.results .card-column {
+    left: 0px !important;
 }
 
 .card-column {
@@ -657,15 +661,15 @@ md-list-item.selected:hover .online-indicator {
 
 #main.initializing #results,
 #main.starting #results {
-    right: -100%;
+    left: 100%;
 }
 
 #main.calculating #results {
-    right: 0;
+    left: calc(100% - 280px);
 }
 
 #main.results #results {
-    right: 0;
+    left: 0;
     width: 100%;
 }
 
