@@ -640,7 +640,7 @@ md-list-item.selected:hover .online-indicator {
 /* results */
 
 #results {
-    width: 100%;
+    width: 280px;
     background-repeat: no-repeat;
     background-color: #333333;
 }
@@ -653,10 +653,6 @@ md-list-item.selected:hover .online-indicator {
     bottom: 0;
     opacity: 0;
     z-index: 0;
-    -webkit-transition: opacity ease 0.5s;
-    -moz-transition: opacity ease 0.5s;
-    -o-transition: opacity ease 0.5s;
-    transition: opacity ease 0.5s;
 }
 
 #main.initializing #results,
@@ -665,16 +661,16 @@ md-list-item.selected:hover .online-indicator {
 }
 
 #main.calculating #results {
-    right: calc(280px - 100%);
+    right: 0;
 }
 
 #main.results #results {
-    right: 0px;
+    right: 0;
     width: 100%;
 }
 
 #main.results #results .result-background {
-    opacity: 0.6;
+    opacity: 0.8;
 }
 
 #results .result-background {
