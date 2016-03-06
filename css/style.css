@@ -541,20 +541,35 @@ md-list-item.selected:hover .online-indicator {
 }
 
 /* title page */
+#title .title-background {
+    color:white;
+    background-size:100% auto;
+}
+
 #title .title {
     font-weight:100;
-    font-size:40px;
-    line-height:48px;
+    font-size:2.5em;
     text-transform:uppercase;
     text-align:center;
 }
 
 #title .subtitle {
     font-weight:200;
-    font-size:24px;
-    line-height:32px;
+    font-size:1.5em;
+    line-height:1.35em;
     text-align:center;
 }
+
+#title .title-buttons {
+    margin-top: 30px;
+    text-align: center;
+}
+
+#title .start-button {
+    padding: 10px 30px;
+    font-size: 1.7em;
+}
+/* \\\ title page */
 
 /* footprint */
 .totalFootprint {
@@ -636,6 +651,7 @@ md-list-item.selected:hover .online-indicator {
     -moz-transition: all ease 0.5s;
     -o-transition: all ease 0.5s;
     transition: all ease 0.5s;
+    opacity: 1;
 }
 
 #main.initializing {
@@ -643,12 +659,10 @@ md-list-item.selected:hover .online-indicator {
 }
 
 #progress md-progress-circular {
-    -webkit-transition: all ease 0.5s;
-    -moz-transition: all ease 0.5s;
-    -o-transition: all ease 0.5s;
-    transition: all ease 0.5s;
+    opacity: 1;
 }
 
 #progress:not(.initializing) md-progress-circular {
     visibility: hidden;
+    opacity: 0;
 }

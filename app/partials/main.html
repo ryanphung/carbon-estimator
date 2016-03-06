@@ -3,13 +3,12 @@
 </div>
 <div id="main" flex layout="row" ng-class="screenState">
     <div id="title" layout="column" flex>
-        <div flex layout="column" layout-align="center center"
-             style="color:white;background-size:100% auto;"
-             ng-style="{'background-image':'url('+settings.landingPageBackground+')'}">
+        <div class="title-background" flex layout="column" layout-align="center center"
+            ng-style="{'background-image':'url('+settings.landingPageBackground+')'}">
             <div class="title" ng-bind-html="settings.pageTitle"></div>
             <div class="subtitle" ng-bind-html="settings.pageSubtitle"></div>
-            <div style="margin-top: 30px; text-align: center;">
-                <md-button class="md-raised" ng-click="start()" style="padding: 10px 30px; font-size: 28px;">Start</md-button><br/>
+            <div class="title-buttons">
+                <md-button class="md-raised start-button" ng-click="start()">Start</md-button><br/>
                 <md-button class="" ng-click="showCredits()">Credits</md-button>
             </div>
         </div>

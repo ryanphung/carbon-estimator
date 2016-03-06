@@ -259,14 +259,6 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
                             $scope.$digest();
                         } else
                             console.error(response.error.message);
-
-                        /*$mdDialog.show({
-                            controller: ProgressDialogController,
-                            templateUrl: 'app/partials/progressDialog.tmpl.html',
-                            parent: angular.element(document.body),
-                            targetEvent: ev,
-                            locals: { title: 'Share To Facebook', message: 'Preparing to share...' }
-                        });*/
             
                         html2canvas(element, {
                             onrendered: function(canvas) {
