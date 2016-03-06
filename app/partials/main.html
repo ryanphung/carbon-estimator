@@ -1,4 +1,4 @@
-<div id="progress" layout-fill layout="row" layout-align="center center" style="position: fixed; z-index: 0;" ng-class="screenState">
+<div id="progress" layout-fill layout="row" layout-align="center center" ng-class="screenState">
     <md-progress-circular md-mode="indeterminate"></md-progress-circular>
 </div>
 <div id="main" flex layout="row" ng-class="screenState">
@@ -14,33 +14,27 @@
         </div>
     </div>
     
-    <div layout="column" class="md-whiteframe-z3 card-column" ng-hide="screenState == 'initializing'" ng-class="{ {{activityGroup.type}}:true, selected: activityGroup.selected, starting: screenState == 'starting' }" ng-repeat="activityGroup in activityGroups" ng-click="selectActivityGroup(activityGroup)" ng-style="{left:activityGroup.left + 'px'}" style="left:100%;">
+    <div layout="column" class="md-whiteframe-z3 card-column" ng-hide="screenState == 'initializing'" ng-class="{ {{activityGroup.type}}:true, selected: activityGroup.selected, starting: screenState == 'starting' }" ng-repeat="activityGroup in activityGroups" ng-click="selectActivityGroup(activityGroup)" ng-style="{left:activityGroup.left + 'px'}">
         <div class="mask"></div>
         <div class="heading">
-            <i class="material-icons" style="font-size: 32px;">{{activityGroup.icon}}</i>
-            <div style="margin-left:32px;margin-top:-32px;font-size:20px;font-weight:200;text-transform:uppercase;">{{activityGroup.desc}}</div>
+            <i class="material-icons">{{activityGroup.icon}}</i>
+            <div>{{activityGroup.desc}}</div>
         </div>
         <div layout-padding class="card" ng-style="{height: activity.footprint * settings.unitHeight + 'px'}" ng-class="{ {{activity.type}}:true, selected: activity.selected, zero: activity.footprint == 0, tiny: activity.footprint <= 1, small: activity.footprint <= 1.5, medium: activity.footprint <= 3}" layout layout-align="center center" ng-repeat="activity in activityGroup.activities" ng-click="selectActivity(activity, activityGroup);$event.stopPropagation();">
             {{activity.desc}}
         </div>
-        <div class="heading" style="margin-bottom:0px;position:absolute;bottom:10px;right:15px;left:10px;">
-            <i class="material-icons" ng-show="activityGroup.completed" style="font-size:32px;width:32px;float:left;">check_circle</i>
-			<a style="float:right;width:auto;line-height:32px;text-align:right;" ng-href="{{activityGroup.source}}" target="_blank">LEARN MORE</a>
+        <div class="footer">
+            <i class="material-icons" ng-show="activityGroup.completed">check_circle</i>
+			<a ng-href="{{activityGroup.source}}" target="_blank">LEARN MORE</a>
         </div>
     </div>
     <div id="fullResults" layout="column" layout-align="end" ng-hide="screenState == 'initializing'" class="card-column md-whiteframe-z3 result" ng-style="{left:resultColumn.left + 'px', width:resultColumn.width + 'px', 'background-image':'url('+settings.resultsPageBackground+')'}" ng-class="{fullResults: screenState == 'results', starting: screenState == 'starting' }">
-        <!--div style="color: white;" flex>
-            <i class="material-icons" style="font-size: 64px;">nature_people</i>
-            <div style="margin-left:64px;margin-top:-64px;font-size:48px;font-weight:200;text-transform:uppercase;">RESULTS</div>
-        </div-->
-		<!--<div class="background"></div>-->
         <div layout="row">
             <div layout="row" flex layout-align="start start">
                 <md-button class="md-raised" ng-click="backToCalculation()" ng-show="screenState == 'results' && !takingScreenshot" style="position:absolute;top:0px;left:0px;opacity:0.8;">Back</md-button>
             </div>
             <div layout="row" flex layout-align="end start" style="position:absolute;top:0px;right:0px;">
                 <md-button class="md-raised md-primary" ng-click="seeFullResults()" ng-show="screenState == 'calculating' && completedGroupsCount == activityGroups.length">Done!</md-button>
-                <!--md-button class="md-raised md-primary" ng-click="seeFullResults()" ng-show="screenState == 'results'">Take  the pledge</md-button-->
             </div>
         </div>
         <div layout="row" style="max-height:100%;">
@@ -74,7 +68,7 @@
                             <div class="totalFootprint">{{baseline.footprint}}</div><div class="totalFootprintDesc"> tonnes of CO<sub>2</sub> per year</div>
                         </div>
                         <div layout="column">
-                            <div layout-padding class="card result" ng-style="{height: baseline.footprint * settings.unitHeight + 'px', 'background-color': baseline.chartcolor, 'color': baseline.textcolor}" layout layout-align="center center" style="text-transform:uppercase;font-weight:800;">
+                            <div layout-padding class="card result" ng-style="{height: baseline.footprint * settings.unitHeight + 'px', 'background-color': baseline.chartcolor, 'color': baseline.textcolor}" layout layout-align="center center">
                                 {{baseline.desc}}
                             </div>
                         </div>
