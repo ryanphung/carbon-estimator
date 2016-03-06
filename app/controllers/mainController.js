@@ -286,7 +286,7 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
         }
         
         $scope.shareResults = function(ev) {
-            var element = angular.element(document.getElementById("fullResults"));
+            var element = angular.element(document.getElementById("results"));
             
             FB.login(function(response) {
                 checkLoginState(function(response) {

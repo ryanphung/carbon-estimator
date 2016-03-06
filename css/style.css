@@ -462,12 +462,21 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
 }
 
 #main.results #results .result-background {
-    opacity: 0.8;
+    background-repeat: no-repeat;
+    opacity: 1;
 }
 
-#results .result-background {
-    background-size: cover;
+/* Hack - instead of "background-size: cover", so that html2canvas can capture the background */
+
+#main.portrait #results .result-background {
+    background-size: auto 100%;
 }
+
+#main.landscape #results .result-background {
+    background-size: 100% auto;
+}
+
+/* \\\ Hack */
 
 #results .wrapper {
     color: white;
