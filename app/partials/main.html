@@ -13,22 +13,30 @@
             </div>
         </div>
     </div>
-    
+
     <div class="nav-button prev" ng-click="doPrevStep();" ng-hide="selectedActivityGroup.arrayId == 0"><i class="material-icons">chevron_left</i></div>
     <div class="nav-button next" ng-click="doNextStep();" ng-hide="selectedActivityGroup.arrayId == activityGroups.length - 1"><i class="material-icons">chevron_right</i></div>
     
-    <div layout="column" class="md-whiteframe-z3 card-column" ng-hide="screenState == 'initializing'" ng-class="{ {{activityGroup.type}}:true, selected: activityGroup.selected }" ng-repeat="activityGroup in activityGroups" ng-click="selectActivityGroup(activityGroup)" ng-style="{left:activityGroup.left + 'px'}" ng-swipe-left="swipeLeft()">
+    <div layout="column" class="md-whiteframe-z3 card-column" ng-hide="screenState == 'initializing'" ng-class="{ {{activityGroup.type}}:true, selected: activityGroup.selected }" ng-repeat="activityGroup in activityGroups" ng-click="selectActivityGroup(activityGroup)" ng-style="{left:activityGroup.left + 'px', color:activityGroup.colortitle}">
         <div class="mask"></div>
         <div class="heading">
             <i class="material-icons">{{activityGroup.icon}}</i>
             <div>{{activityGroup.desc}}</div>
         </div>
-        <div layout-padding class="card" ng-style="{height: activity.footprint * settings.unitHeight + 'px'}" ng-class="{ {{activity.type}}:true, selected: activity.selected, zero: activity.footprint == 0, tiny: activity.footprint <= 1, small: activity.footprint <= 1.5, medium: activity.footprint <= 3}" layout layout-align="center center" ng-repeat="activity in activityGroup.activities" ng-click="selectActivity(activity, activityGroup);$event.stopPropagation();">
+        <div layout-padding class="card {{activity.fontsize}}" 
+             ng-style="{height: activity.footprint * settings.unitHeight + 'px', 
+                       'background-color': activity.footprint != 0 ? (activity.selected ? activityGroup.colorselected : activityGroup.colorbox) : 'white', 
+                       'border-color': activity.footprint == 0 ? activityGroup.colorbox : 'white',
+                       'color': activity.footprint == 0 ? activityGroup.colorbox : 'white'}" 
+             ng-class="{selected: activity.selected, zero:activity.footprint == 0}" 
+             layout layout-align="center center" 
+             ng-repeat="activity in activityGroup.activities" 
+             ng-click="selectActivity(activity, activityGroup);$event.stopPropagation();">
             {{activity.desc}}
         </div>
         <div class="footer">
             <i class="material-icons" ng-show="activityGroup.completed">check_circle</i>
-			<a ng-href="{{activityGroup.source}}" target="_blank">LEARN MORE</a>
+			<a ng-href="{{activityGroup.source}}" ng-style="{color:activityGroup.colortitle}" target="_blank">LEARN MORE</a>
         </div>
     </div>
     <div id="results" layout="column" layout-align="end" ng-hide="screenState == 'initializing'" class="card-column md-whiteframe-z3" ng-click="seeFullResults()">
@@ -48,7 +56,11 @@
                     <div class="totalFootprint">{{totalFootprint}}</div><div class="totalFootprintDesc"> tonnes of CO<sub>2</sub> per year</div>
                 </div>
                 <div layout="column">
-                    <div layout-padding class="card result" ng-style="{height: activity.footprint * settings.unitHeight + 'px'}" ng-class="{ {{activity.type}}:true, zero: activity.footprint == 0, tiny: activity.footprint <= 1, small: activity.footprint <= 1.5, medium: activity.footprint <= 3}" layout layout-align="center center" ng-repeat="activity in selectedActivities">
+                    <div layout-padding class="card result {{activity.fontsize}}" 
+                         ng-style="{height: activity.footprint * settings.unitHeight + 'px', 'background-color':activity.colorbox}"
+                         layout layout-align="center center" 
+                         ng-class="{zero: activity.footprint == 0}"
+                         ng-repeat="activity in selectedActivities">
                         {{activity.desc}}
                     </div>
                 </div>
