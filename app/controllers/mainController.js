@@ -20,6 +20,7 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
                     
                     for (var i = 0; i < activities.length; i++) {
                         tempGroups[activities[i].type].activities.push(activities[i]);
+                        activities[i].colorbox = tempGroups[activities[i].type].colorbox;
                     }
                     
                     $scope.activityGroups = groups;
