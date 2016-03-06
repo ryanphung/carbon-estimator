@@ -125,7 +125,8 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
             }
         }
         
-        if ($scope.isPhonePortrait) {
+        // skip this for now
+        if (false && $scope.isPhonePortrait) {
             $mdDialog.show(
               $mdDialog.alert()
                 .parent(angular.element(document.querySelector('#popupContainer')))

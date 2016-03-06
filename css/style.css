@@ -549,7 +549,6 @@ md-list-item.selected:hover .online-indicator {
     left: 270px;
     right: 10px;
     bottom: 10px;
-    
     /* replace layout="row" */
     -webkit-flex-direction: row;
     -ms-flex-direction: row;
@@ -567,30 +566,31 @@ md-list-item.selected:hover .online-indicator {
     font-size: 12px;
 }
 
+#results .baseline {
+    flex: 1;
+}
+
 @media (max-width: 700px) {
     #results .baseline-wrapper {
         left: 205px;
         display: block;
         height: 100%;
     }
-    
     #results .baseline-wrapper .baseline {
         position: absolute;
         width: calc(100% - 10px);
         bottom: 0;
+        flex: none;
     }
-    
     #results .baseline-wrapper .baseline .baseline-card {
         background-color: transparent !important;
         border-top: 2px solid white;
         border-radius: 0;
         color: transparent !important;
     }
-    
     #results .totalFootprint {
         font-size: 32px;
     }
-    
     #results .mobile-baseline-desc {
         display: inline-block;
     }
@@ -796,6 +796,7 @@ md-list-item.selected:hover .online-indicator {
     -moz-transition: all ease 0.6s;
     -o-transition: all ease 0.6s;
     transition: all ease 0.6s;
+    cursor: pointer;
 }
 
 #main.calculating .nav-button {
@@ -812,7 +813,13 @@ md-list-item.selected:hover .online-indicator {
 }
 
 .nav-button.next {
-    right: 70px;
+    right: 290px;
+}
+
+@media (max-width: 700px) {
+    .nav-button.next {
+        right: 70px;
+    }
 }
 
 
