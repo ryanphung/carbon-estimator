@@ -636,6 +636,7 @@ md-list-item.selected:hover .online-indicator {
     }
 }
 
+
 /* results */
 
 #results {
@@ -730,14 +731,16 @@ md-list-item.selected:hover .online-indicator {
 
 #results .result-card-container {
     width: 260px;
-    overflow-y: auto;
+    overflow-x: visible;
     z-index: 100;
+    padding-top: 40px;
 }
 
 #results .result-button-container {
     top: 10px;
     position: absolute;
     width: 260px;
+    z-index: 200;
 }
 
 
