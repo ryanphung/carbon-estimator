@@ -439,7 +439,7 @@ md-list-item.selected:hover .online-indicator {
     transition: all cubic-bezier(0.25, 0.8, 0.25, 1) 0.8s;
 }
 
-@media (max-width: 568px) {
+@media (max-width: 700px) {
     .card-column {
         width: calc(100% - 60px);
     }
@@ -480,11 +480,11 @@ md-list-item.selected:hover .online-indicator {
     cursor: default;
 }
 
-@media (max-width: 568px) {
+@media (max-width: 700px) {
     #main.calculating #results.card-column {
         left: calc(100% - 60px);
     }
-    #results .card {
+    #main.calculating #results .card {
         color: rgba(255, 255, 255, 0);
         font-size: 10px;
     }
@@ -549,6 +549,51 @@ md-list-item.selected:hover .online-indicator {
     left: 270px;
     right: 10px;
     bottom: 10px;
+    
+    /* replace layout="row" */
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    box-sizing: border-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+#results .mobile-baseline-desc {
+    margin-left: 5px;
+    display: none;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+@media (max-width: 700px) {
+    #results .baseline-wrapper {
+        left: 205px;
+        display: block;
+        height: 100%;
+    }
+    
+    #results .baseline-wrapper .baseline {
+        position: absolute;
+        width: calc(100% - 10px);
+        bottom: 0;
+    }
+    
+    #results .baseline-wrapper .baseline .baseline-card {
+        background-color: transparent !important;
+        border-top: 2px solid white;
+        border-radius: 0;
+        color: transparent !important;
+    }
+    
+    #results .totalFootprint {
+        font-size: 32px;
+    }
+    
+    #results .mobile-baseline-desc {
+        display: inline-block;
+    }
 }
 
 #results .baseline-wrapper .card.result {
@@ -593,15 +638,9 @@ md-list-item.selected:hover .online-indicator {
     padding-top: 40px;
 }
 
-@media (max-width: 568px) {
+@media (max-width: 700px) {
     #results .result-card-container {
-        width: 100px;
-    }
-    #main.calculating #results .result-card-container {
-        width: 50px;
-    }
-    #results .baseline-wrapper {
-        left: 110px;
+        width: 200px;
     }
 }
 
@@ -645,7 +684,7 @@ md-list-item.selected:hover .online-indicator {
     font-size: 1.7em;
 }
 
-@media (max-width: 568px) {
+@media (max-width: 700px) {
     #title .title {
         font-size: 2em;
         line-height: 1em;
@@ -712,12 +751,6 @@ md-list-item.selected:hover .online-indicator {
         top: 40px;
         right: 0;
     }
-    .totalFootprint {
-        font-size: 40px;
-    }
-    .totalFootprintDesc {
-        font-size: 14px;
-    }
 }
 
 #main {
@@ -775,11 +808,11 @@ md-list-item.selected:hover .online-indicator {
 }
 
 .nav-button.prev {
-    left: 20px;
+    left: 10px;
 }
 
 .nav-button.next {
-    right: 80px;
+    right: 70px;
 }
 
 

@@ -78,13 +78,13 @@
                     </div>
                 </div>
                 <div layout="row" class="baseline-wrapper">
-                    <div layout="column" flex style="margin-left:10px;" ng-repeat="baseline in baselines">
+                    <div class="baseline" layout="column" style="margin-left:10px;" ng-repeat="baseline in baselines">
                         <div flex></div>
-                        <div layout layout-align="center center" style="color:white;">
-                            <div class="totalFootprint">{{baseline.footprint}}</div><div class="totalFootprintDesc"> tonnes of CO<sub>2</sub> per year</div>
+                        <div>
+                            <div class="totalFootprint">{{baseline.footprint}}<span class="totalFootprintDesc"> tonnes of CO<sub>2</sub> per year</span><span class="mobile-baseline-desc">{{baseline.desc}}</span></div>
                         </div>
                         <div layout="column">
-                            <div layout-padding class="card result" ng-style="{height: baseline.footprint * settings.unitHeight + 'px', 'background-color': baseline.chartcolor, 'color': baseline.textcolor}" layout layout-align="center center">
+                            <div layout-padding class="card result baseline-card" ng-style="{height: baseline.footprint * settings.unitHeight + 'px', 'background-color': baseline.chartcolor, 'color': baseline.textcolor}" layout layout-align="center center">
                                 {{baseline.desc}}
                             </div>
                         </div>
