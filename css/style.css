@@ -153,62 +153,6 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
 /* \icons */
 
 
-/* animation */
-
-.animate-hide-left {
-    -webkit-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-    -moz-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-    -o-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-    transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-    transform: translateX(0);
-}
-
-.animate-hide-left.ng-hide {
-    transform: translateX(-100%);
-}
-
-.animate-hide-right {
-    -webkit-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-    -moz-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-    -o-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-    transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-    transform: translateX(0);
-}
-
-.animate-hide-right.ng-hide {
-    transform: translateX(100%);
-}
-
-.animate-hide-up {
-    -webkit-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-    -moz-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-    -o-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-    transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-    transform: translateY(0);
-}
-
-.animate-hide-up.ng-hide {
-    transform: translateY(-100%);
-}
-
-.animate-fade-down {
-    -webkit-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-    -moz-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-    -o-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-    transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-    opacity: 1;
-    transform: translateX(0);
-}
-
-.animate-fade-down.ng-hide {
-    transform: translateY(20%);
-    opacity: 0;
-}
-
-
-/* \animation */
-
-
 /* carbon calc */
 
 .card {
@@ -219,10 +163,10 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
     overflow: hidden;
     text-align: center;
     cursor: pointer;
-    -webkit-transition: left ease 0.6s, -webkit-transform ease 0.6s, background-color ease 0.6s;
-    -moz-transition: left ease 0.6s, transform ease 0.6s, background-color ease 0.6s;
-    -o-transition: left ease 0.6s, transform ease 0.6s, background-color ease 0.6s;
-    transition: left ease 0.6s, transform ease 0.6s, -ms-transform ease 0.6s, background-color ease 0.6s;
+    -webkit-transition: left ease 0.8s, -webkit-transform ease 0.8s, background-color ease 0.8s;
+    -moz-transition: left ease 0.8s, transform ease 0.8s, background-color ease 0.8s;
+    -o-transition: left ease 0.8s, transform ease 0.8s, background-color ease 0.8s;
+    transition: left ease 0.8s, transform ease 0.8s, -ms-transform ease 0.8s, background-color ease 0.8s;
     text-transform: uppercase;
     padding-top: 0px;
     padding-bottom: 0px;
@@ -443,18 +387,12 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: black;
+    background-color: transparent;
     visibility: hidden;
-    opacity: 0;
-    -webkit-transition: opacity ease 0.8s, visibility ease 0.8s;
-    -moz-transition: opacity ease 0.8s, width ease 0.8s;
-    -o-transition: opacity ease 085s, visibility ease 0.8s;
-    transition: opacity ease 0.8s, visibility ease 0.8s;
 }
 
 #main.partial-results .results-mask,
-#main.results .results-mask{
-    opacity: 0.7;
+#main.results .results-mask {
     visibility: visible;
 }
 
@@ -745,10 +683,10 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
 }
 
 #main {
-    -webkit-transition: opacity ease 0.5s;
-    -moz-transition: opacity ease 0.5s;
-    -o-transition: opacity ease 0.5s;
-    transition: opacity ease 0.5s;
+    -webkit-transition: opacity ease 0.8s;
+    -moz-transition: opacity ease 0.8s;
+    -o-transition: opacity ease 0.8s;
+    transition: opacity ease 0.8s;
     opacity: 1;
 }
 
@@ -783,10 +721,10 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
     z-index: 300;
     opacity: 0;
     visibility: hidden;
-    -webkit-transition: opacity ease 0.6s;
-    -moz-transition: opacity ease 0.6s;
-    -o-transition: opacity ease 0.6s;
-    transition: opacity ease 0.6s;
+    -webkit-transition: opacity ease 0.8s;
+    -moz-transition: opacity ease 0.8s;
+    -o-transition: opacity ease 0.8s;
+    transition: opacity ease 0.8s;
     overflow: hidden;
     cursor: pointer;
 }
