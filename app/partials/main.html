@@ -15,7 +15,9 @@
     </div>
 
     <div class="nav-button prev" ng-click="doPrevStep();" ng-hide="selectedActivityGroup.arrayId == 0"></div>
-    <div class="nav-button next" ng-click="doNextStep();" ng-hide="selectedActivityGroup.arrayId == activityGroups.length - 1 || !activityGroups[selectedActivityGroup.arrayId + 1].completed"></div>
+    <div class="nav-button next"
+         ng-click="selectedActivityGroup.arrayId < activityGroups.length - 1 ? doNextStep() : seeFullResults()"
+         ng-show="(selectedActivityGroup.arrayId != activityGroups.length - 1 && activityGroups[selectedActivityGroup.arrayId + 1].completed) || (selectedActivityGroup.arrayId == activityGroups.length - 1 && completedGroupsCount == activityGroups.length)"></div>
     <div layout="column" class="card-column" ng-hide="screenState == 'initializing' || (isPhonePortrait && !(activityGroup.selected || (activityGroup.arrayId < activityGroups.length - 1 && activityGroups[activityGroup.arrayId + 1].selected) || (activityGroup.arrayId > 0 && activityGroups[activityGroup.arrayId - 1].selected)))" ng-class="{ {{activityGroup.type}}:true, selected: activityGroup.selected, completed: activityGroup.completed }" ng-repeat="activityGroup in activityGroups" ng-click="selectActivityGroup(activityGroup)" ng-style="{left:activityGroup.left + 'px', color:activityGroup.colortitle}">
         <div class="mask" ng-if="!isPhonePortrait"></div>
         <div class="heading">
@@ -46,7 +48,7 @@
                 <md-button class="md-raised" ng-click="backToCalculation(); $event.stopPropagation();" ng-show="screenState == 'results' && !takingScreenshot" style="position:absolute;top:0px;left:0px;opacity:0.8;">Back</md-button>
             </div>
             <div layout="row" flex layout-align="end start" style="position:absolute;top:0px;right:0px;">
-                <md-button class="md-raised md-primary" ng-click="seeFullResults()" ng-show="screenState == 'calculating' && completedGroupsCount == activityGroups.length">Done!</md-button>
+                <md-button class="md-raised md-primary" ng-click="seeFullResults()" ng-if="!isPhonePortrait" ng-show="screenState == 'calculating' && completedGroupsCount == activityGroups.length">Done!</md-button>
             </div>
         </div>
         <div layout="row" style="max-height:100%;">

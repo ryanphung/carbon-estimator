@@ -200,17 +200,31 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
                 $scope.completedGroupsCount++;
                 
                 if ($scope.completedGroupsCount == $scope.activityGroups.length) {
-                    $mdDialog.show(
-                      $mdDialog.confirm()
-                        .parent(angular.element(document.querySelector('#popupContainer')))
-                        .clickOutsideToClose(true)
-                        .title('Done!')
-                        .content('Take me to see results now, and see how I compare to other people.')
-                        .cancel('Cancel')
-                        .ok('See Results')
-                    ).then(function() {
-                        $scope.seeFullResults();
+                    $mdDialog.show({
+                        controller: ResultProgressDialogController,
+                        templateUrl: 'app/partials/resultProgressDialog.tmpl.html',
+                        parent: angular.element(document.body),
+                        clickOutsideToClose: false
                     });
+                    
+                    var self = $scope;
+                    
+                    function ResultProgressDialogController($scope, $mdDialog) {
+                        $scope.progress = 0;
+                        
+                        function increment() {
+                            $scope.progress += 1;
+                            $scope.$digest();
+                            if ($scope.progress < 100)
+                                setTimeout(increment, 50);
+                            else {
+                                $mdDialog.hide();
+                                self.seeFullResults();
+                            }
+                        }
+                        
+                        setTimeout(increment, 50);
+                    }
                 }
             }
 
