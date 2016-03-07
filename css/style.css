@@ -399,10 +399,10 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
     margin: -10px;
     background-color: white;
     opacity: 0.8;
-    -webkit-transition: opacity ease 0.6s, visibility ease 0.6s;
-    -moz-transition: opacity ease 0.6s, visibility ease 0.6s;
-    -o-transition: opacity ease 0.6s, visibility ease 0.6s;
-    transition: opacity ease 0.6s, visibility ease 0.6s;
+    -webkit-transition: opacity ease 0.8s, visibility ease 0.8s;
+    -moz-transition: opacity ease 0.8s, visibility ease 0.8s;
+    -o-transition: opacity ease 0.8s, visibility ease 0.8s;
+    transition: opacity ease 0.8s, visibility ease 0.8s;
 }
 
 .card-column.selected>.mask {
@@ -437,6 +437,27 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
 
 /* results */
 
+.results-mask {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: black;
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transition: opacity ease 0.8s, visibility ease 0.8s;
+    -moz-transition: opacity ease 0.8s, width ease 0.8s;
+    -o-transition: opacity ease 085s, visibility ease 0.8s;
+    transition: opacity ease 0.8s, visibility ease 0.8s;
+}
+
+#main.partial-results .results-mask,
+#main.results .results-mask{
+    opacity: 0.7;
+    visibility: visible;
+}
+
 #results {
     width: 280px;
     background-repeat: no-repeat;
@@ -449,7 +470,7 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
 
 @media (max-width: 700px) {
     #results {
-        background-color: #a0a0a0;
+        background-color: #333333;
     }
 }
 
@@ -475,6 +496,12 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
 #main.results #results {
     left: 0;
     width: 100%;
+}
+
+@media (max-width: 700px) {
+    #main.partial-results #results {
+        left: calc(100% - 170px);
+    }
 }
 
 #main.results #results .result-background {

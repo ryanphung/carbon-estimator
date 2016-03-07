@@ -275,7 +275,18 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
             }, 1000);
         };
         
+        $scope.seePartialResults = function () {
+            $scope.screenState = "partial-results";
+            calculateColumnPositions();
+        }
+        
+        $scope.hidePartialResults = function () {
+            $scope.screenState = "calculating";
+            calculateColumnPositions();
+        }
+        
         $scope.seeFullResults = function() {
+            
             if ($scope.completedGroupsCount == $scope.activityGroups.length) {
                 $scope.screenState = "results";
                 calculateColumnPositions();

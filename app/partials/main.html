@@ -39,7 +39,8 @@
 			<a ng-href="{{activityGroup.source}}" ng-style="{color:activityGroup.colortitle}" target="_blank">LEARN MORE</a>
         </div>
     </div>
-    <div id="results" layout="column" layout-align="end" ng-hide="screenState == 'initializing'" class="card-column" ng-click="seeFullResults()">
+    <div class="results-mask" ng-click="hidePartialResults()"></div>
+    <div id="results" layout="column" layout-align="end" ng-hide="screenState == 'initializing'" class="card-column" ng-click="isPhonePortrait && screenState != 'partial-results' ? seePartialResults() : seeFullResults()">
         <div class="result-background" ng-style="{'background-image':'url('+settings.resultsPageBackground+')'}"></div>
         <div layout="row" class="result-button-container">
             <div layout="row" flex layout-align="start start">
