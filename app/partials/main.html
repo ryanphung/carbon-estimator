@@ -14,10 +14,10 @@
         </div>
     </div>
 
-    <div class="nav-button prev" ng-click="doPrevStep();" ng-hide="selectedActivityGroup.arrayId == 0"><i class="material-icons">chevron_left</i></div>
-    <div class="nav-button next" ng-click="doNextStep();" ng-hide="selectedActivityGroup.arrayId == activityGroups.length - 1"><i class="material-icons">chevron_right</i></div>
+    <div class="nav-button prev" ng-click="doPrevStep();" ng-hide="selectedActivityGroup.arrayId == 0"></div>
+    <div class="nav-button next" ng-click="doNextStep();" ng-hide="selectedActivityGroup.arrayId == activityGroups.length - 1 || !activityGroups[selectedActivityGroup.arrayId + 1].completed"></div>
     
-    <div layout="column" class="card-column" ng-hide="screenState == 'initializing'" ng-class="{ {{activityGroup.type}}:true, selected: activityGroup.selected }" ng-repeat="activityGroup in activityGroups" ng-click="selectActivityGroup(activityGroup)" ng-style="{left:activityGroup.left + 'px', color:activityGroup.colortitle}">
+    <div layout="column" class="card-column" ng-hide="screenState == 'initializing'" ng-class="{ {{activityGroup.type}}:true, selected: activityGroup.selected, completed: activityGroup.completed }" ng-repeat="activityGroup in activityGroups" ng-click="selectActivityGroup(activityGroup)" ng-style="{left:activityGroup.left + 'px', color:activityGroup.colortitle}">
         <div class="mask" ng-if="!isPhonePortrait"></div>
         <div class="heading">
             <i class="material-icons">{{activityGroup.icon}}</i>

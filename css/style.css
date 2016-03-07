@@ -342,6 +342,17 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
     line-height: 2em;
 }
 
+@media (max-width: 700px) {
+    .card-column>.footer {
+        position: relative;
+        width: 100%;
+        bottom: initial;
+    }
+    .card-column>.footer>i {
+        display: none;
+    }
+}
+
 
 /* \\\ card column */
 
@@ -368,7 +379,6 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
         border-left: 1px solid #e0e0e0;
         box-shadow: none;
     }
-    
     #results.card-column {
         border: none;
     }
@@ -437,6 +447,12 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
     transition: left ease 0.8s, width ease 0.8s;
 }
 
+@media (max-width: 700px) {
+    #results {
+        background-color: #a0a0a0;
+    }
+}
+
 #results .result-background {
     position: absolute;
     top: 0;
@@ -466,6 +482,7 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
     opacity: 1;
 }
 
+
 /* Hack - instead of "background-size: cover", so that html2canvas can capture the background */
 
 #main.portrait #results .result-background {
@@ -475,6 +492,7 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
 #main.landscape #results .result-background {
     background-size: 100% auto;
 }
+
 
 /* \\\ Hack */
 
@@ -537,7 +555,6 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
         text-transform: uppercase;
         font-size: 12px;
     }
-    
     #results .baseline-total-footprint-amount {
         float: right;
     }
@@ -733,19 +750,69 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
 
 .nav-button {
     position: absolute;
-    bottom: 50px;
-    width: 70px;
-    height: 70px;
+    bottom: 10px;
+    width: 60px;
+    height: 120px;
     z-index: 300;
-    border-radius: 50%;
     opacity: 0;
-    background-color: rgba(0, 0, 0, 0.2);
     visibility: hidden;
     -webkit-transition: opacity ease 0.6s;
     -moz-transition: opacity ease 0.6s;
     -o-transition: opacity ease 0.6s;
     transition: opacity ease 0.6s;
+    overflow: hidden;
     cursor: pointer;
+}
+
+.nav-button:before {
+    content: '';
+    position: relative;
+    display: inline-block;
+    width: 200%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+}
+
+.nav-button:after {
+    position: relative;
+    top: -100%;
+    font-size: 90px;
+    line-height: 120px;
+    margin: 0;
+    padding: 0;
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
+.nav-button.prev {
+    left: 0;
+}
+
+.nav-button.prev:before {
+    left: -100%;
+}
+
+.nav-button.prev:after {
+    content: 'chevron_left';
+    right: 50%;
+}
+
+.nav-button.next {
+    right: 280px;
+}
+
+.nav-button.next:after {
+    content: 'chevron_right';
 }
 
 #main.calculating .nav-button {
@@ -757,17 +824,9 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
     font-size: 70px;
 }
 
-.nav-button.prev {
-    left: 10px;
-}
-
-.nav-button.next {
-    right: 290px;
-}
-
 @media (max-width: 700px) {
     .nav-button.next {
-        right: 70px;
+        right: 60px;
     }
 }
 
