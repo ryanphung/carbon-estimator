@@ -163,10 +163,10 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
     overflow: hidden;
     text-align: center;
     cursor: pointer;
-    -webkit-transition: left ease 0.8s, -webkit-transform ease 0.8s, background-color ease 0.8s;
-    -moz-transition: left ease 0.8s, transform ease 0.8s, background-color ease 0.8s;
-    -o-transition: left ease 0.8s, transform ease 0.8s, background-color ease 0.8s;
-    transition: left ease 0.8s, transform ease 0.8s, -ms-transform ease 0.8s, background-color ease 0.8s;
+    -webkit-transition: -webkit-transform ease 0.8s, background-color ease 0.8s, opacity 0.8s;
+    -moz-transition: transform ease 0.8s, background-color ease 0.8s, opacity 0.8s;
+    -o-transition: transform ease 0.8s, background-color ease 0.8s, opacity 0.8s;
+    transition: transform ease 0.8s, -ms-transform ease 0.8s, background-color ease 0.8s, opacity 0.8s;
     text-transform: uppercase;
     padding-top: 0px;
     padding-bottom: 0px;
@@ -175,23 +175,31 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
 
 .card.result.ng-enter {
     position: relative;
-    left: -300px;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    -ms-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
     opacity: 0;
 }
 
 .card.result.ng-enter.ng-enter-active {
-    left: 0px;
+    -webkit-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
     opacity: 1;
 }
 
 .card.result.ng-leave {
     position: relative;
-    left: 0px;
+    -webkit-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
     opacity: 1;
 }
 
 .card.result.ng-leave.ng-leave-active {
-    left: -300px;
+    -webkit-transform: translate3d(-300px, 0, 0);
+    -ms-transform: translate3d(-300px, 0, 0);
+    transform: translate3d(-300px, 0, 0);
     opacity: 0;
 }
 
@@ -243,12 +251,30 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
 
 /* card column */
 
-#main.starting .card-column {
-    left: 100%;
+.card-column {
+    position: absolute;
+    padding: 10px;
+    width: 280px;
+    height: 100%;
+    left: 0;
+    background-color: white;
+    -webkit-transition: -webkit-transform ease 0.8s;
+    -moz-transition: -moz-transform ease 0.8s;
+    -o-transition: transform ease 0.8s;
+    transition: transform ease 0.8s, -ms-transform ease 0.8s;
+    box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.2), 0px 7px 10px 1px rgba(0, 0, 0, 0.14), 0px 2px 16px 1px rgba(0, 0, 0, 0.12);
 }
 
-#main.results .card-column {
-    left: 0px !important;
+@media (max-width: 700px) {
+    .card-column {
+        width: calc(100% - 60px);
+        border-left: 1px solid #e0e0e0;
+        box-shadow: none;
+    }
+    
+    #results.card-column {
+        border: none;
+    }
 }
 
 .card-column>.heading {
@@ -297,35 +323,8 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
     }
 }
 
-
-/* \\\ card column */
-
 .card.result {
     margin-top: 0px;
-}
-
-.card-column {
-    padding: 10px;
-    position: absolute;
-    width: 280px;
-    height: 100%;
-    background-color: white;
-    -webkit-transition: left ease 0.8s;
-    -moz-transition: left ease 0.8s;
-    -o-transition: left ease 0.8s;
-    transition: left ease 0.8s;
-    box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.2), 0px 7px 10px 1px rgba(0, 0, 0, 0.14), 0px 2px 16px 1px rgba(0, 0, 0, 0.12);
-}
-
-@media (max-width: 700px) {
-    .card-column {
-        width: calc(100% - 60px);
-        border-left: 1px solid #e0e0e0;
-        box-shadow: none;
-    }
-    #results.card-column {
-        border: none;
-    }
 }
 
 .card-column:hover {
@@ -362,9 +361,6 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
 }
 
 @media (max-width: 700px) {
-    #main.calculating #results.card-column {
-        left: calc(100% - 60px);
-    }
     #main.calculating #results .card {
         color: rgba(255, 255, 255, 0);
         font-size: 10px;
@@ -397,13 +393,9 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
 }
 
 #results {
-    width: 280px;
+    width: 100%;
     background-repeat: no-repeat;
     background-color: #333333;
-    -webkit-transition: left ease 0.8s, width ease 0.8s;
-    -moz-transition: left ease 0.8s, width ease 0.8s;
-    -o-transition: left ease 0.8s, width ease 0.8s;
-    transition: left ease 0.8s, width ease 0.8s;
 }
 
 @media (max-width: 700px) {
@@ -420,26 +412,6 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
     bottom: 0;
     opacity: 0;
     z-index: 0;
-}
-
-#main.initializing #results,
-#main.starting #results {
-    left: 100%;
-}
-
-#main.calculating #results {
-    left: calc(100% - 280px);
-}
-
-#main.results #results {
-    left: 0;
-    width: 100%;
-}
-
-@media (max-width: 700px) {
-    #main.partial-results #results {
-        left: calc(100% - 170px);
-    }
 }
 
 #main.results #results .result-background {
