@@ -198,24 +198,23 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
 
         $scope.selectActivity = function(activity, activityGroup) {
             // do not allow selecting twice
-            if (activity.selected)
-                return;
+            if (!activity.selected) {
+                activity.selected = true;
 
-            activity.selected = true;
+                // if the same type of activity has been selected, remove it first
+                for (var i = 0; i < $scope.selectedActivities.length; i++) {
+                    if ($scope.selectedActivities[i].type == activity.type) {
+                        $scope.selectedActivities[i].selected = false;
+                        $scope.totalFootprint -= $scope.selectedActivities[i].footprint;
+                        $scope.selectedActivities.splice(i, 1);
 
-            // if the same type of activity has been selected, remove it first
-            for (var i = 0; i < $scope.selectedActivities.length; i++) {
-                if ($scope.selectedActivities[i].type == activity.type) {
-                    $scope.selectedActivities[i].selected = false;
-                    $scope.totalFootprint -= $scope.selectedActivities[i].footprint;
-                    $scope.selectedActivities.splice(i, 1);
-
-                    break;
+                        break;
+                    }
                 }
-            }
 
-            $scope.selectedActivities.push(activity);
-            $scope.totalFootprint += activity.footprint;
+                $scope.selectedActivities.push(activity);
+                $scope.totalFootprint += activity.footprint;
+            }
 
             if (!activityGroup.completed) {
                 activityGroup.completed = true;
