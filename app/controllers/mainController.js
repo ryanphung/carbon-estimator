@@ -3,8 +3,13 @@
 angular.module('app').controller('MainController', ['$scope', 'ServerService', 'UiBasicService', '$timeout', '$mdDialog', '$q', '$sanitize', '$window',
     function($scope, $server, $uiBasic, $timeout, $mdDialog, $q, $sanitize, $window) {
         $scope.titleShown = true;
-        $scope.isPhonePortrait = $window.innerWidth <= 568;
+        $scope.isPhonePortrait = $window.innerWidth <= 700;
 
+        // prevent overscroll in iOS
+        $(document).on('touchmove', function(ev) {
+            ev.preventDefault();
+        });
+        
         function loadData() {
             return $q(function(resolve, reject) {
                 $server.loadData()
@@ -94,10 +99,10 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
                             else
                                 $scope.activityGroups[i + 1].left = $scope.activityGroups[i].left + columnWidth;
                         }
-                        
+
                         $scope.resultLeft = $window.innerWidth - 280;
                     } else {
-                        columnWidth = $window.innerWidth - 60;
+                        columnWidth = $window.innerWidth - 40;
                         remainingWidth = columnWidth;
 
                         var i;
@@ -111,7 +116,7 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
                         for (i; i < $scope.activityGroups.length; i++) {
                             $scope.activityGroups[i].left = ($window.innerWidth + 40);
                         }
-                        $scope.resultLeft = $window.innerWidth - 60;
+                        $scope.resultLeft = $window.innerWidth - 40;
                     }
                     break;
                 case 'partial-results':

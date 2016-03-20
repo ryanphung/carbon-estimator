@@ -1,7 +1,7 @@
-<div id="progress" layout-fill layout="row" layout-align="center center" ng-class="screenState">
+<div id="progress" layout-fill layout="row" layout-align="center center" ng-class="screenState" class="disable-select">
     <md-progress-circular md-mode="indeterminate"></md-progress-circular>
 </div>
-<div id="main" flex layout="row" ng-class="screenState">
+<div id="main" flex layout="row" ng-class="screenState" class="disable-select">
     <div id="title" layout="column" flex ng-if="titleShown">
         <div class="title-background" flex layout="column" layout-align="center center"
             ng-style="{'background-image':'url('+settings.landingPageBackground+')'}">
