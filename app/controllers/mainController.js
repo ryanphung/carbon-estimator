@@ -125,6 +125,12 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
                     }
                     break;
                 case 'results':
+                    if (!$scope.isPhonePortrait) {
+                        for (var i = 0; i < $scope.activityGroups.length - 1; i++) {
+                            $scope.activityGroups[i + 1].left = 0;
+                        }
+                    }
+                    
                     $scope.resultLeft = 0;
                     break;
             }

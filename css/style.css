@@ -177,10 +177,10 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
     overflow: hidden;
     text-align: center;
     cursor: pointer;
-    -webkit-transition: -webkit-transform ease 0.8s, background-color ease 0.8s, opacity 0.8s;
-    -moz-transition: transform ease 0.8s, background-color ease 0.8s, opacity 0.8s;
-    -o-transition: transform ease 0.8s, background-color ease 0.8s, opacity 0.8s;
-    transition: transform ease 0.8s, -ms-transform ease 0.8s, background-color ease 0.8s, opacity 0.8s;
+    -webkit-transition: -webkit-transform ease-in-out 0.5s, background-color ease-in-out 0.35s, opacity ease-in-out 0.35s;
+    -moz-transition: transform ease-in-out 0.5s, background-color ease-in-out 0.35s, opacity ease-in-out 0.35s;
+    -o-transition: transform ease-in-out 0.5s, background-color ease-in-out 0.35s, opacity ease-in-out 0.35s;
+    transition: transform ease-in-out 0.5s, -ms-transform ease-in-out 0.35s, background-color ease-in-out 0.8s, opacity ease-in-out 0.35s;
     text-transform: uppercase;
     padding-top: 0px;
     padding-bottom: 0px;
@@ -231,11 +231,19 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
     outline: 0;
 }
 
-/*.card-column .card:hover {
-    -ms-transform: scale(1.05, 1.05);
-    -webkit-transform: scale(1.05, 1.05);
-    transform: scale(1.05, 1.05);
-}*/
+.card-column .card:hover {
+    opacity: 0.5;
+}
+
+#results.card-column .card:hover {
+    opacity: 1;
+}
+
+@media (max-width: 700px) {
+    .card-column .card:hover {
+        opacity: 1;
+    }
+}
 
 #results.card-column .card:hover {
     -ms-transform: none;
@@ -294,6 +302,10 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
         width: calc(100% - 40px);
         border-left: 1px solid #e0e0e0;
         box-shadow: none;
+        -webkit-transition-duration: 0.5s;
+        -moz-transition-duration: 0.5s;
+        -o-transition-duration: 0.5s;
+        transition-duration: 0.5s;
     }
     #results.card-column {
         border: none;
@@ -365,10 +377,10 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
     margin: -10px;
     background-color: white;
     opacity: 0.8;
-    -webkit-transition: opacity ease 0.8s, visibility ease 0.8s;
-    -moz-transition: opacity ease 0.8s, visibility ease 0.8s;
-    -o-transition: opacity ease 0.8s, visibility ease 0.8s;
-    transition: opacity ease 0.8s, visibility ease 0.8s;
+    -webkit-transition: opacity ease-in-out 0.5s, visibility ease-in-out 0.5s;
+    -moz-transition: opacity ease-in-out 0.5s, visibility ease-in-out 0.5s;
+    -o-transition: opacity ease-in-out 0.5s, visibility ease-in-out 0.5s;
+    transition: opacity ease-in-out 0.5s, visibility ease-in-out 0.5s;
 }
 
 .card-column.selected>.mask {
@@ -560,8 +572,8 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
     overflow-x: visible;
     z-index: 100;
     padding-top: 40px;
-    
-    opacity: 0.99; /* fixing a weird problem with html2canvas where it cannot render the cards */
+    opacity: 0.99;
+    /* fixing a weird problem with html2canvas where it cannot render the cards */
 }
 
 @media (max-width: 700px) {
@@ -683,10 +695,10 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
 }
 
 #main {
-    -webkit-transition: opacity ease 0.8s;
-    -moz-transition: opacity ease 0.8s;
-    -o-transition: opacity ease 0.8s;
-    transition: opacity ease 0.8s;
+    -webkit-transition: opacity ease-in-out 0.8s;
+    -moz-transition: opacity ease-in-out 0.8s;
+    -o-transition: opacity ease-in-out 0.8s;
+    transition: opacity ease-in-out 0.8s;
     opacity: 1;
 }
 
@@ -721,10 +733,10 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
     z-index: 300;
     opacity: 0;
     visibility: hidden;
-    -webkit-transition: opacity ease 0.8s;
-    -moz-transition: opacity ease 0.8s;
-    -o-transition: opacity ease 0.8s;
-    transition: opacity ease 0.8s;
+    -webkit-transition: opacity ease-in-out 0.5s;
+    -moz-transition: opacity ease-in-out 0.5s;
+    -o-transition: opacity ease-in-out 0.5s;
+    transition: opacity ease-in-out 0.5s;
     overflow: hidden;
     cursor: pointer;
 }
