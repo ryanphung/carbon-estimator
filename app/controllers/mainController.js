@@ -167,13 +167,13 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
             var isChrome = !!window.chrome && !isOpera; // Chrome 1+
             var isIE = /*@cc_on!@*/ false || !!document.documentMode; // At least IE6
 
-            if (!isSafari && !isChrome && !isFirefox) {
+            if (true || !isSafari && !isChrome && !isFirefox) {
                 $mdDialog.show(
                     $mdDialog.alert()
                     .parent(angular.element(document.querySelector('#popupContainer')))
                     .clickOutsideToClose(true)
                     .title('')
-                    .content('We try to provide you the best experience.\n\nThis website currently works well in Chrome, Safari or Firefox. We recommend you viewing it in Chrome, Safari or Firefox.\n\nThey are great browsers! :)')
+                    .content('We try to provide you the best experience.<br/><br/>This website currently works well in Chrome, Safari or Firefox. We recommend you viewing it in Chrome, Safari or Firefox.<br/><br/>They are great browsers! :)')
                     .ok('Got it!')
                 );
             }
