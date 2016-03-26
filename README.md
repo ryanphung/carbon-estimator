@@ -43,8 +43,10 @@ $tabletopProvider.setTabletopOptions({
 
 Now you can start modifying the configuration in the Google sheet according to your need.
 
-## Contact
+## Current usage
 
-Contact us at hello@whatismycarbonfootprint.com
+* [Climate Reality Project Asia, Singapore](http://climaterealityproject.asia/)
+
+Drop us a note at hello@whatismycarbonfootprint.com if you want your website to be listed here.
 
 Have fun!
