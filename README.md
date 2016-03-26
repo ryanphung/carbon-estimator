@@ -20,7 +20,7 @@ The data is publicly available here: https://docs.google.com/spreadsheets/d/18k_
 1. [Clone the repository](https://help.github.com/articles/cloning-a-repository/)
 1. From the main directory, run `bower install` to install the dependencies
 1. Copy the entire directory to a directory that your web server can serve, for example `htdocs/carbon-estimator`
-1. Access the Carbon Estimator at http://<your domain>/carbon-estimator
+1. Access the Carbon Estimator at http://your_domain/carbon-estimator
 
 ## Customisation
 
