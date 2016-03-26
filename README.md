@@ -16,7 +16,7 @@ The data is publicly available here: https://docs.google.com/spreadsheets/d/18k_
 
 ## Installation
 
-1. Requirements: [node.js, npm](http://nodejs.org/), [bower](http://bower.io/), [git](http://git-scm.org/) and a simple ([web server](http://www.apachefriends.org).
+1. Requirements: [node.js, npm](http://nodejs.org/), [bower](http://bower.io/), [git](http://git-scm.org/) and a simple [web server](http://www.apachefriends.org).
 1. [Clone the repository](https://help.github.com/articles/cloning-a-repository/)
 1. From the main directory, run `bower install` to install the dependencies
 1. Copy the entire directory to a directory that your web server can serve, for example `htdocs/carbon-estimator`
