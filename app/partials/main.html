@@ -90,7 +90,7 @@
                 <div flex layout="column" layout-padding class="wrapper">
                     <div ng-show="totalFootprint > result.lowerboundary && totalFootprint <= result.upperboundary" ng-repeat="result in resultInterpretation">
                         <div class="title">{{result.heading}}</div>
-                        <div class="subtitle"><span ng-show="userFullName">{{userFullName}}, </span><span style="font-weight:400;">{{result.message1}}</span></div>
+                        <div class="subtitle"><span ng-show="userFullName">{{userFullName}}, </span><span style="font-weight:400;">{{result.message}}</span></div>
                         <div id="buttonWrapper" style="z-index: 2100;">
                             <md-button id="fbShareBtn" class="md-raised md-primary" ng-show="!takingScreenshot && settings['facebookAppId']" ng-click="shareResults($event)">
                                 <span ng-if="!isPhonePortrait">Share on facebook</span>
