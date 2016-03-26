@@ -14,27 +14,37 @@ Try this working demo that was built for Singapore: http://climaterealityproject
 
 The data is publicly available here: https://docs.google.com/spreadsheets/d/18k_xx-K2UyOLkZUz3C-qf840aNaab1B6xElDdszeMS8/
 
-## Installation and Customisation Guide
+## Installation
 
-Requirements: [node.js, npm](http://nodejs.org/), [bower](http://bower.io/) and [git](http://git-scm.org/)
-
+1. Requirements: [node.js, npm](http://nodejs.org/), [bower](http://bower.io/), [git](http://git-scm.org/) and a simple ([web server](http://www.apachefriends.org).
 1. [Clone the repository](https://help.github.com/articles/cloning-a-repository/)
-1. From the main directory, run `bower install`
-1. Make sure you have a Web Server, for example the default Apache httpd in Mac OS, or the XAMPP stack (http://www.apachefriends.org)
-1. For local development: copy the source code to a directory that the Web Server can serve. For example, in Mac OS:
+1. From the main directory, run `bower install` to install the dependencies
+1. Copy the entire directory to a directory that your web server can serve, for example `htdocs/carbon-estimator`
+1. Access the Carbon Estimator at http://localhost/carbon-estimator
 
- ```
-ln -s ~/Projects/CarbonEstimator /Applications/XAMPP/htdocs/carbon-estimator
+## Customisation
+
+### Google Sheet data
+
+The tool relies on a single Google sheet for all its configuration. To create your own customisation:
+
+1. Duplicate the sample [Google sheet](https://docs.google.com/spreadsheets/d/18k_xx-K2UyOLkZUz3C-qf840aNaab1B6xElDdszeMS8/).
+1. Google Sheet menu > File > Publish to the web. You'll get a link that look similar to this: `https://docs.google.com/spreadsheets/d/18k_xx-K2UyOLkZUz3C-qf840aNaab1B6xElDdszeMS8/pubhtml`
+1. Copy and pase the link into the file `app/router.js` at this part:
 ```
-After that, you should be able to access the Carbon Estimator at http://localhost/carbon-estimator
+...
+$tabletopProvider.setTabletopOptions({
+    key: "https://docs.google.com/spreadsheets/d/18k_xx-K2UyOLkZUz3C-qf840aNaab1B6xElDdszeMS8/pubhtml",
+    prettyColumnNames: false,
+    parseNumbers: true
+});
+...
+```
 
-1. For a server: copy the entire folder to your web server.
+Now you can start modifying the configuration in the Google sheet according to your need.
 
 ## Contact
 
 Contact us at hello@whatismycarbonfootprint.com
 
 Have fun!
-
-Cheers,
-Mike, Ryan and Kah Hwee
