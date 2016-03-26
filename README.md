@@ -29,7 +29,8 @@ The tool relies on a single Google sheet for all its configuration. To create yo
 1. Duplicate the sample [Google sheet](https://docs.google.com/spreadsheets/d/18k_xx-K2UyOLkZUz3C-qf840aNaab1B6xElDdszeMS8/).
 1. Publish your new Google sheet: Google Sheet menu > File > Publish to the web. You'll get a link that look similar to this: `https://docs.google.com/spreadsheets/d/18k_xx-K2UyOLkZUz3C-qf840aNaab1B6xElDdszeMS8/pubhtml`
 1. Copy and pase the link into the file `app/router.js` at this part:
-    ```...
+    ```
+    ...
     $tabletopProvider.setTabletopOptions({
         key: "https://docs.google.com/spreadsheets/d/18k_xx-K2UyOLkZUz3C-qf840aNaab1B6xElDdszeMS8/pubhtml",
         prettyColumnNames: false,
