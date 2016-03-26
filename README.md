@@ -24,8 +24,6 @@ The data is publicly available here: https://docs.google.com/spreadsheets/d/18k_
 
 ## Customisation
 
-### Google Sheet data
-
 The tool relies on a single Google sheet for all its configuration. To create your own customisation:
 
 1. Duplicate the sample [Google sheet](https://docs.google.com/spreadsheets/d/18k_xx-K2UyOLkZUz3C-qf840aNaab1B6xElDdszeMS8/).
