@@ -38,8 +38,7 @@ $tabletopProvider.setTabletopOptions({
 });
 ...
 ```
-
-    Now you can start modifying the configuration in the Google sheet according to your need.
+Now you can start modifying the configuration in the Google sheet according to your need.
 
 ## Current Usage
 
