@@ -38,6 +38,9 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
                         for (var i = 0; i < settings.length; i++)
                             $scope.settings[settings[i]['setting']] = settings[i]['value'];
 
+                        if(angular.isDefined($scope.settings['facebookAppId']) && $scope.settings['facebookAppId']!=""){
+                            window.initFb($scope.settings['facebookAppId']);
+                        }
                         resolve();
                     }, function(tabletop) {
                         reject('Failed to load data.');
