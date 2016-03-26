@@ -2,7 +2,7 @@
 
 Hello!
 
-To limit climate change to 3.5℃, globally we must emit no more than 350 gigatons of carbon this century. It is our hope this tool helps people reduce their carbon footprints to make a sustainable future possible.
+To limit climate change to 2℃, globally we must emit no more than 350 gigatons of carbon this century. It is our hope this tool helps people reduce their carbon footprints to make a sustainable future possible.
 
 We believe this is the most intuitive and fastest carbon estimator available that works on both desktop and mobile devices.
 
