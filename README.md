@@ -12,7 +12,11 @@ Feel free to customise and install it on your own website, and help to spread to
 
 Try this working demo that was built for Singapore: http://climaterealityproject.asia/calculator
 
-## Getting Started Guide
+The data is publicly available here: https://docs.google.com/spreadsheets/d/18k_xx-K2UyOLkZUz3C-qf840aNaab1B6xElDdszeMS8/pubhtml#
+
+## Installation and Customisation Guide
+
+## Development Guide
 
 1. Clone the repository
 1. From the main directory, run `bower install`
