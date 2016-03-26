@@ -42,7 +42,12 @@ The tool relies on a single Google sheet for all its configuration. To create yo
 
 ## Facebook Sharing
 
-To enable Facebook sharing is a bit more complicated and you'll need to get Facebook approval.
+To update title, description and thumbnail to display when the page link is shared on Facebook:
+1. Open `index.html` for edit.
+1. Look for `<meta property="og:` and update the content of the <meta> tags.
+1. Look for `<meta property="fb:` and update the Facebook Application ID. If you do not have one, you can leave the current content there or remove the entire line.
+
+To enable Facebook Share button in the page is a bit more complicated and you'll need to get Facebook approval.
 
 1. Create a [Facebook app](https://developers.facebook.com/docs/apps/register).
 1. Make sure that the site URL matches your website, for example: http://climaterealityproject.asia/calculator - otherwise user will not be able to authenticate to Facebook from your website.
