@@ -43,6 +43,7 @@ The tool relies on a single Google sheet for all its configuration. To create yo
 ## Facebook Sharing
 
 To update title, description and thumbnail to display when the page link is shared on Facebook:
+
 1. Open `index.html` for edit.
 1. Look for `<meta property="og:` and update the content of the <meta> tags.
 1. Look for `<meta property="fb:` and update the Facebook Application ID. If you do not have one, you can leave the current content there or remove the entire line.
