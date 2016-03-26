@@ -28,7 +28,7 @@ The tool relies on a single Google sheet for all its configuration. To create yo
 
 1. Duplicate the sample [Google sheet](https://docs.google.com/spreadsheets/d/18k_xx-K2UyOLkZUz3C-qf840aNaab1B6xElDdszeMS8/).
 1. Publish your new Google sheet: Google Sheet menu > File > Publish to the web. You'll get a link that look similar to this: `https://docs.google.com/spreadsheets/d/18k_xx-K2UyOLkZUz3C-qf840aNaab1B6xElDdszeMS8/pubhtml`
-1. Copy and pase the link into the file `app/router.js` at this part:
+1. Copy and paste the link into the file `app/router.js` at this part:
 
         ...
         $tabletopProvider.setTabletopOptions({
@@ -39,6 +39,24 @@ The tool relies on a single Google sheet for all its configuration. To create yo
         ...
 
 1. Now you can start modifying the configuration in the Google sheet according to your need, the modification will be available in the carbon estimator in a few minutes.
+
+## Facebook Sharing
+
+To enable Facebook sharing is a bit more complicated and you'll need to get Facebook approval.
+
+1. Create a [Facebook app](https://developers.facebook.com/docs/apps/register).
+1. Make sure that the site URL matches your website, for example: http://climaterealityproject.asia/calculator - otherwise user will not be able to authenticate to Facebook from your website.
+1. Once you created the app, you'll have a unique app ID. Go to Google sheet, tab `Settings`, paste it into the field `facebookAppId`.
+1. [Submit](https://developers.facebook.com/docs/apps/review) your app for review. It takes a few days but here are a few tips to speed up the process:
+    * Add as much details and screenshots as you can.
+    * Be clear in all your description.
+    * Suggest that you replace this line in `app/controllers/mainController.js`:
+        
+            $scope.fbMessage = 'Check out my carbon footprint.\nCalculated via http://bit.ly/carbonsgsh';
+        
+        with
+
+            $scope.fbMessage = '';
 
 ## Current Usage
 
