@@ -39,9 +39,9 @@ $tabletopProvider.setTabletopOptions({
 ...
 ```
 
-Now you can start modifying the configuration in the Google sheet according to your need.
+    Now you can start modifying the configuration in the Google sheet according to your need.
 
-## Current usage
+## Current Usage
 
 * [Climate Reality Project Asia, Singapore](http://climaterealityproject.asia/)
 
