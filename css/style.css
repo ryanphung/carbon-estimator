@@ -671,7 +671,7 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
     text-shadow: 0.5px 0.5px 2px #000000;
 }
 
-#fbShareBtn {
+/*#fbShareBtn {
     position: absolute;
     right: 170px;
     margin-right: 0;
@@ -681,6 +681,12 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
     position: absolute;
     right: 0;
     margin-right: 0;
+}*/
+
+#fbShareBtn, #pledgeBtn {
+    float: right;
+    margin-right: 4px;
+    margin-left: 4px;
 }
 
 @media (max-width: 700px) {
