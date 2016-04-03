@@ -10,9 +10,9 @@ Feel free to customise and install it on your own website, and help to spread to
 
 ## Demo
 
-Try this working demo that was built for Singapore: http://climaterealityproject.asia/calculator
+Try this working demo that was built for Singapore: http://whatismycarbonfootprint.com/sg
 
-The data is publicly available here: https://docs.google.com/spreadsheets/d/18k_xx-K2UyOLkZUz3C-qf840aNaab1B6xElDdszeMS8/
+The data is publicly available here: https://drive.google.com/open?id=1QC1qEfeDZdGcd0d5Bv7WQSwonSQvnjSDmxN2BrZOFOE
 
 ## Installation
 
@@ -26,7 +26,7 @@ The data is publicly available here: https://docs.google.com/spreadsheets/d/18k_
 
 The tool relies on a single Google sheet for all its configuration. To create your own customisation:
 
-1. Duplicate the sample [Google sheet](https://docs.google.com/spreadsheets/d/18k_xx-K2UyOLkZUz3C-qf840aNaab1B6xElDdszeMS8/).
+1. Duplicate the sample [Google sheet](https://drive.google.com/open?id=1NoSg0Sj_ZCcoYfZXMGxP0hcvFtipKUGZ5r0e6xPMrX0).
 1. Publish your new Google sheet: Google Sheet menu > File > Publish to the web. You'll get a link that look similar to this: `https://docs.google.com/spreadsheets/d/18k_xx-K2UyOLkZUz3C-qf840aNaab1B6xElDdszeMS8/pubhtml`
 1. Copy and paste the link into the file `app/router.js` at this part:
 
