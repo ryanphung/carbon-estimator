@@ -8,8 +8,11 @@
             <div class="title" ng-bind-html="settings.pageTitle"></div>
             <div class="subtitle" ng-bind-html="settings.pageSubtitle"></div>
             <div class="title-buttons">
-                <md-button class="md-raised start-button" ng-click="start()">Start</md-button><br/>
-                <md-button class="" ng-click="showCredits()">Credits</md-button>
+                <div style="margin-bottom:20px;">
+                    <md-button class="md-raised start-button" ng-click="start()">Start</md-button>
+                </div>
+                <md-button ng-click="showCredits()" style="vertical-align: top;">Credits</md-button>
+                <md-button href="http://whatismycarbonfootprint.com" target="_blank">Want to create your own calculator?</md-button>
             </div>
         </div>
     </div>
