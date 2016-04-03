@@ -671,18 +671,6 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
     text-shadow: 0.5px 0.5px 2px #000000;
 }
 
-/*#fbShareBtn {
-    position: absolute;
-    right: 170px;
-    margin-right: 0;
-}
-
-#pledgeBtn {
-    position: absolute;
-    right: 0;
-    margin-right: 0;
-}*/
-
 #fbShareBtn, #pledgeBtn {
     float: right;
     margin-right: 4px;
@@ -704,16 +692,6 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
     #results .subtitle2 {
         font-size: 14px;
         line-height: 16px;
-    }
-    #fbShareBtn {
-        right: 65px;
-        margin-right: 0;
-        min-width: 0;
-    }
-    #pledgeBtn {
-        right: 0;
-        margin-right: 0;
-        min-width: 0;
     }
 }
 
