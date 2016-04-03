@@ -41,6 +41,9 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
                         if(angular.isDefined($scope.settings['facebookAppId']) && $scope.settings['facebookAppId']!=""){
                             window.initFb($scope.settings['facebookAppId']);
                         }
+                        if(angular.isDefined($scope.settings['googleAnalyticsID'])){
+                            initTracking($scope.settings['googleAnalyticsID']);
+                        }
                         resolve();
                     }, function(tabletop) {
                         reject('Failed to load data.');
@@ -195,6 +198,7 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
             for (var i = 0; i < $scope.activityGroups.length; i++) {
                 $scope.activityGroups[i].selected = false;
             }
+            trackEvent('Activity: ' + activityGroup.type, 'Select activity group', activityGroup.desc);
             activityGroup.selected = true;
             calculateColumnPositions();
         };
@@ -215,6 +219,8 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
                     }
                 }
 
+                trackEvent('Activity: ' + activity.type, 'Select activity', activity.desc, activity.footprint);
+                
                 $scope.selectedActivities.push(activity);
                 $scope.totalFootprint += activity.footprint;
             }
@@ -294,6 +300,9 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
             activity.selected = false;
 
             $scope.totalFootprint -= activity.footprint;
+            
+            trackEvent('Activity: ' + activity.type, 'De-select activity', activity.desc, activity.footprint);
+            
         };
 
         $scope.swipeLeft = function() {
@@ -311,16 +320,20 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
                 $scope.titleShown = false;
                 $scope.$digest();
             }, 1000);
+            
+            trackEvent('Button', 'start');
         };
 
         $scope.seePartialResults = function() {
             $scope.screenState = "partial-results";
             calculateColumnPositions();
+            trackEvent('Result', 'See partial result');
         }
 
         $scope.hidePartialResults = function() {
             $scope.screenState = "calculating";
             calculateColumnPositions();
+            trackEvent('Result', 'Hide partial result');
         }
 
         $scope.seeFullResults = function() {
@@ -329,15 +342,19 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
                 $scope.screenState = "results";
                 calculateColumnPositions();
             }
+            trackEvent('Result', 'See full result', '', $scope.totalFootprint);
         }
 
         $scope.backToCalculation = function() {
             $scope.screenState = "calculating";
             calculateColumnPositions();
+            trackEvent('Button', 'Back to calculation');
         }
 
         $scope.shareResults = function(ev) {
             var element = angular.element(document.getElementById("results"));
+            
+            trackEvent('Result', 'Share');
 
             FB.login(function(response) {
                 checkLoginState(function(response) {
@@ -347,6 +364,7 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
                             $scope.userFullName = response.name;
                             $scope.takingScreenshot = true;
                             $scope.$digest();
+                            trackEvent('Login', 'UserId', response.id + ": " + response.name);
                         } else
                             console.error(response.error.message);
 
@@ -400,6 +418,7 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
                                                 call: { // options of the $.ajax call
                                                     url: 'https://graph.facebook.com/me/photos', // or replace *me* with albumid
                                                     success: function() {
+                                                        trackEvent('Result', 'Successfully shared', response.id + ": " + fbStatusMessage);
                                                         $mdDialog.show(
                                                             $mdDialog.alert()
                                                             .parent(angular.element(document.querySelector('#popupContainer')))
@@ -457,6 +476,7 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
                 )
                 .ok('Cool!')
             );
+            trackEvent('Button', 'credit');
         };
     }
 ]);
