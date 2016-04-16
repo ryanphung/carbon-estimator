@@ -76,7 +76,10 @@
             <div layout="column" class="result-card-container">
                 <div flex></div>
                 <div layout layout-align="center center" style="color:white;">
-                    <div class="totalFootprint">{{totalFootprint}}</div><div class="totalFootprintDesc"> tonnes of CO<sub>2</sub> per year</div>
+                    <div class="totalFootprint">
+                        <div class="totalFootprintAmount">{{totalFootprint}}</div>
+                        <div class="totalFootprintDesc"> tonnes of CO<sub>2</sub> per year</div>
+                    </div>
                 </div>
                 <div layout="column">
                     <div layout-padding class="card result {{activity.fontsize}}" 
@@ -111,8 +114,9 @@
                         <div flex></div>
                         <div>
                             <div class="totalFootprint">
-                                <div class="baseline-total-footprint-amount">{{baseline.footprint}}<span class="totalFootprintDesc"> tonnes of CO<sub>2</sub> per year</span></div>
                                 <div class="mobile-baseline-desc">{{baseline.desc}}</div>
+                                <div class="totalFootprintAmount">{{baseline.footprint}}</div>
+                                <div class="totalFootprintDesc"> tonnes of CO<sub>2</sub> per year</div>
                             </div>
                         </div>
                         <div layout="column">

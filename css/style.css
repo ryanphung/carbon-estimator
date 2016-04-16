@@ -535,23 +535,21 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
         text-align: right;
         font-size: 32px;
     }
+    #results .baseline-wrapper .baseline .totalFootprint {
+        margin-bottom: 2px;
+    }
     #results .mobile-baseline-desc {
-        display: block;
-        float: right;
-        margin-right: 5px;
-        margin-top: 20px;
+        display: table-cell;
+        padding-right: 5px;
         text-transform: uppercase;
         font-size: 12px;
+        vertical-align: bottom;
+        text-align: right;
+        width: 100%;
+        line-height: 1;
     }
     #results .baseline-total-footprint-amount {
         float: right;
-    }
-}
-
-@media (min-width: 701px) {
-    #results .baseline-total-footprint-amount {
-        line-height: 10px;
-        margin-bottom: 15px;
     }
 }
 
@@ -664,17 +662,30 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
 /* footprint */
 
 .totalFootprint {
+    display: table;
+    width: 100%;
+    text-shadow: 0.5px 0.5px 2px #000000;
+    margin-bottom: 5px;
+}
+
+.totalFootprintAmount {
+    display: table-cell;
     font-size: 40px;
     font-weight: 800;
-    text-shadow: 0.5px 0.5px 2px #000000;
+    vertical-align: bottom;
+    line-height: 30px;
+    text-align: center;
 }
 
 .totalFootprintDesc {
+    display: table-cell;
+    width: 100%;
     font-size: 16px;
-    margin: 25px 0 10px 5px;
+    padding-left: 5px;
     opacity: 0.9;
     font-weight: 400;
-    text-shadow: 0.5px 0.5px 2px #000000;
+    vertical-align: bottom;
+    line-height: 1;
 }
 
 #fbShareBtn,
