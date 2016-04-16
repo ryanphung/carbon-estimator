@@ -527,7 +527,8 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
     }
     #results .baseline-wrapper .baseline .baseline-card {
         background-color: transparent !important;
-        border-top: 2px dashed white;
+        border-color: rgba(255, 255, 255, 0.8);
+        border-top: 1px dashed white;
         border-radius: 0;
         color: transparent !important;
     }
