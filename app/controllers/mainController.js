@@ -9,7 +9,7 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
         $(document).on('touchmove', function(ev) {
             ev.preventDefault();
         });
-        
+
         function loadData() {
             return $q(function(resolve, reject) {
                 $server.loadData()
@@ -38,10 +38,10 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
                         for (var i = 0; i < settings.length; i++)
                             $scope.settings[settings[i]['setting']] = settings[i]['value'];
 
-                        if(angular.isDefined($scope.settings['facebookAppId']) && $scope.settings['facebookAppId']!=""){
+                        if (angular.isDefined($scope.settings['facebookAppId']) && $scope.settings['facebookAppId'] != "") {
                             window.initFb($scope.settings['facebookAppId']);
                         }
-                        if(angular.isDefined($scope.settings['googleAnalyticsID'])){
+                        if (angular.isDefined($scope.settings['googleAnalyticsID'])) {
                             initTracking($scope.settings['googleAnalyticsID']);
                         }
                         resolve();
@@ -136,7 +136,7 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
                             $scope.activityGroups[i + 1].left = 0;
                         }
                     }
-                    
+
                     $scope.resultLeft = 0;
                     break;
             }
@@ -219,12 +219,12 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
                     }
                 }
 
-                trackEvent('Activity: ' + activity.type, 
-                    'Select activity', 
-                    activity.desc, 
+                trackEvent('Activity: ' + activity.type,
+                    'Select activity',
+                    activity.desc,
                     activity.footprint * 1000 //it seems Google Analytics has issue with decimal values so this is converted to KG from Tonne
-                ); 
-                
+                );
+
                 $scope.selectedActivities.push(activity);
                 $scope.totalFootprint += activity.footprint;
             }
@@ -304,9 +304,9 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
             activity.selected = false;
 
             $scope.totalFootprint -= activity.footprint;
-            
+
             trackEvent('Activity: ' + activity.type, 'De-select activity', activity.desc, activity.footprint);
-            
+
         };
 
         $scope.swipeLeft = function() {
@@ -324,7 +324,7 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
                 $scope.titleShown = false;
                 $scope.$digest();
             }, 1000);
-            
+
             trackEvent('Button', 'start');
         };
 
@@ -357,7 +357,7 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
 
         $scope.shareResults = function(ev) {
             var element = angular.element(document.getElementById("results"));
-            
+
             trackEvent('Result', 'Share');
 
             FB.login(function(response) {
@@ -373,73 +373,83 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
                             console.error(response.error.message);
 
                         setTimeout(function() {
+                            var w = document.documentElement.clientWidth;
+                            var h = document.documentElement.clientHeight;
+                            var canvas = document.createElement('canvas');
+                            canvas.width = w * 2;
+                            canvas.height = h * 2;
+                            canvas.style.width = w + 'px';
+                            canvas.style.height = h + 'px';
+                            var context = canvas.getContext('2d');
+                            context.scale(2, 2);
+
                             html2canvas(element, {
-                                onrendered: function(canvas) {
-                                    $scope.takingScreenshot = false;
-                                    $scope.$digest();
+                                canvas: canvas
+                            }).then(function(canvas) {
+                                $scope.takingScreenshot = false;
+                                $scope.$digest();
 
-                                    var imgData = canvas.toDataURL();
+                                var imgData = canvas.toDataURL();
 
-                                    $mdDialog.show({
-                                            controller: ShareDialogController,
-                                            templateUrl: 'app/partials/shareDialog.tmpl.html',
+                                $mdDialog.show({
+                                        controller: ShareDialogController,
+                                        templateUrl: 'app/partials/shareDialog.tmpl.html',
+                                        parent: angular.element(document.body),
+                                        targetEvent: ev,
+                                        clickOutsideToClose: true,
+                                        locals: {
+                                            fbImage: imgData
+                                        }
+                                    })
+                                    .then(function(fbStatusMessage) {
+                                        // login
+
+                                        imgData = imgData.replace(/^data:image\/(png|jpe?g);base64,/, '');
+                                        // convert the base64 string to string containing the binary data
+                                        imgData = conversions.base64ToString(imgData);
+
+                                        $mdDialog.show({
+                                            controller: ProgressDialogController,
+                                            templateUrl: 'app/partials/progressDialog.tmpl.html',
                                             parent: angular.element(document.body),
-                                            targetEvent: ev,
-                                            clickOutsideToClose: true,
+                                            /*targetEvent: ev,*/
                                             locals: {
-                                                fbImage: imgData
+                                                title: 'Sharing Image To Facebook...',
+                                                message: 'Please do not close the window; it may takes a few seconds to a few minutes depending on your network connection.'
                                             }
-                                        })
-                                        .then(function(fbStatusMessage) {
-                                            // login
-
-                                            imgData = imgData.replace(/^data:image\/(png|jpe?g);base64,/, '');
-                                            // convert the base64 string to string containing the binary data
-                                            imgData = conversions.base64ToString(imgData);
-
-                                            $mdDialog.show({
-                                                controller: ProgressDialogController,
-                                                templateUrl: 'app/partials/progressDialog.tmpl.html',
-                                                parent: angular.element(document.body),
-                                                /*targetEvent: ev,*/
-                                                locals: {
-                                                    title: 'Sharing Image To Facebook...',
-                                                    message: 'Please do not close the window; it may takes a few seconds to a few minutes depending on your network connection.'
-                                                }
-                                            });
-
-                                            postImage({
-                                                fb: { // data to be sent to FB
-                                                    caption: fbStatusMessage,
-                                                    // place any other API params you wish to send. Ex: place / tags etc.
-                                                    accessToken: FB_ACCESS_TOKEN,
-                                                    file: {
-                                                        name: 'File Name.jpg',
-                                                        type: 'image/jpeg', // or png
-                                                        dataString: imgData
-                                                    }
-                                                },
-                                                call: { // options of the $.ajax call
-                                                    url: 'https://graph.facebook.com/me/photos', // or replace *me* with albumid
-                                                    success: function() {
-                                                        trackEvent('Result', 'Successfully shared', response.id + ": " + fbStatusMessage);
-                                                        $mdDialog.show(
-                                                            $mdDialog.alert()
-                                                            .parent(angular.element(document.querySelector('#popupContainer')))
-                                                            .clickOutsideToClose(true)
-                                                            .title('Share successully.')
-                                                            .content('The result has been shared to your facebook wall.')
-                                                            .ok('Got it!')
-                                                            .targetEvent(ev)
-                                                        );
-                                                    },
-                                                    error: function() {
-                                                        console.error('failed');
-                                                    }
-                                                }
-                                            });
                                         });
-                                }
+
+                                        postImage({
+                                            fb: { // data to be sent to FB
+                                                caption: fbStatusMessage,
+                                                // place any other API params you wish to send. Ex: place / tags etc.
+                                                accessToken: FB_ACCESS_TOKEN,
+                                                file: {
+                                                    name: 'File Name.jpg',
+                                                    type: 'image/jpeg', // or png
+                                                    dataString: imgData
+                                                }
+                                            },
+                                            call: { // options of the $.ajax call
+                                                url: 'https://graph.facebook.com/me/photos', // or replace *me* with albumid
+                                                success: function() {
+                                                    trackEvent('Result', 'Successfully shared', response.id + ": " + fbStatusMessage);
+                                                    $mdDialog.show(
+                                                        $mdDialog.alert()
+                                                        .parent(angular.element(document.querySelector('#popupContainer')))
+                                                        .clickOutsideToClose(true)
+                                                        .title('Share successully.')
+                                                        .content('The result has been shared to your facebook wall.')
+                                                        .ok('Got it!')
+                                                        .targetEvent(ev)
+                                                    );
+                                                },
+                                                error: function() {
+                                                    console.error('failed');
+                                                }
+                                            }
+                                        });
+                                    });
                             });
                         }, 500);
                     });
