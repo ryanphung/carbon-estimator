@@ -219,7 +219,11 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
                     }
                 }
 
-                trackEvent('Activity: ' + activity.type, 'Select activity', activity.desc, activity.footprint);
+                trackEvent('Activity: ' + activity.type, 
+                    'Select activity', 
+                    activity.desc, 
+                    activity.footprint * 1000 //it seems Google Analytics has issue with decimal values so this is converted to KG from Tonne
+                ); 
                 
                 $scope.selectedActivities.push(activity);
                 $scope.totalFootprint += activity.footprint;
