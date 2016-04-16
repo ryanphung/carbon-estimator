@@ -7,7 +7,7 @@ select,
 html,
 textarea,
 input {
-    font-family: 'Helvetica Neue', Roboto, sans-serif;
+    font-family: Raleway, 'Helvetica Neue', Roboto, sans-serif;
 }
 
 html,
@@ -682,7 +682,7 @@ md-list md-list-item.selected button.md-button:not([disabled]):hover {
     font-size: 40px;
     font-weight: 800;
     vertical-align: bottom;
-    line-height: 30px;
+    line-height: 1;
     text-align: center;
 }
 
