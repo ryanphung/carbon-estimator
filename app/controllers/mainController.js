@@ -461,7 +461,7 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
             });
 
             function ShareDialogController($scope, $mdDialog, fbImage) {
-                $scope.fbMessage = 'Check out my carbon footprint.\nCalculated via http://bit.ly/carbonsgsh';
+                $scope.fbMessage = 'Check out my carbon footprint.\nCalculated via http://bit.ly/mycarbonsg';
                 $scope.fbImage = fbImage;
                 $scope.hide = function() {
                     $mdDialog.hide();
