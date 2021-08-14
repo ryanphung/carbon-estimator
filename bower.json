@@ -23,8 +23,6 @@
     "angular-route": "1.4.8",
     "metrics-graphics": "~2.6.0",
     "mg-line-brushing": "~0.0.3",
-    "tabletop": "~1.4.3",
-    "angular-tabletop": "~0.2.2",
     "angular-sanitize": "1.4.8",
     "angular-touch": "1.4.8",
     "angular": "1.4.8",
