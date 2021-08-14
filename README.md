@@ -27,16 +27,10 @@ The data is publicly available here: https://drive.google.com/open?id=1QC1qEfeDZ
 The tool relies on a single Google sheet for all its configuration. To create your own customisation:
 
 1. Duplicate the sample [Google sheet](https://drive.google.com/open?id=1NoSg0Sj_ZCcoYfZXMGxP0hcvFtipKUGZ5r0e6xPMrX0).
-1. Publish your new Google sheet: Google Sheet menu > File > Publish to the web. You'll get a link that look similar to this: `https://docs.google.com/spreadsheets/d/18k_xx-K2UyOLkZUz3C-qf840aNaab1B6xElDdszeMS8/pubhtml`
-1. Copy and paste the link into the file `app/router.js` at this part:
+1. Publish your new Google sheet: Google Sheet menu > File > Publish to the web. You'll get a link that look similar to this: `https://docs.google.com/spreadsheets/d/1NoSg0Sj_ZCcoYfZXMGxP0hcvFtipKUGZ5r0e6xPMrX0/pubhtml`
+1. Copy and paste the ID part of the URL (`1NoSg0Sj_ZCcoYfZXMGxP0hcvFtipKUGZ5r0e6xPMrX0`) into the file `app/server.js` and replace the ID on this line:
 
-        ...
-        $tabletopProvider.setTabletopOptions({
-            key: "https://docs.google.com/spreadsheets/d/18k_xx-K2UyOLkZUz3C-qf840aNaab1B6xElDdszeMS8/pubhtml",
-            prettyColumnNames: false,
-            parseNumbers: true
-        });
-        ...
+        const configGoogleSheetId = '1NoSg0Sj_ZCcoYfZXMGxP0hcvFtipKUGZ5r0e6xPMrX0'
 
 1. Now you can start modifying the configuration in the Google sheet according to your need, the modification will be available in the carbon estimator in a few minutes.
 
@@ -57,9 +51,9 @@ To enable Facebook Share button in the page is a bit more complicated and you'll
     * Add as much details and screenshots as you can.
     * Be clear in all your description.
     * Suggest that you replace this line in `app/controllers/mainController.js`:
-        
+
             $scope.fbMessage = 'Check out my carbon footprint.\nCalculated via http://bit.ly/carbonsgsh';
-        
+
         with
 
             $scope.fbMessage = '';
