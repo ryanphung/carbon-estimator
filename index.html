@@ -12,12 +12,12 @@
     <meta property="og:image" content="http://climaterealityproject.asia/calculator/img/thumbnail.png" />
     <meta property="fb:app_id" content="1671770239773354" />
     <!-- END: The <meta> tags here are to determine what title/description/thumbnail to display when the page link is shared on Facebook -->
-    
+
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
     <link rel="stylesheet" href="bower_components/metrics-graphics/dist/metricsgraphics.css">
     <link rel="stylesheet" href="bower_components/mg-line-brushing/dist/mg_line_brushing.css">
-    <link rel="stylesheet" href="css/style.css?v201801111346">
+    <link rel="stylesheet" href="css/style.css?v202108141700">
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,100italic,100,200,200italic,300,400italic,300italic,500,500italic,600italic,600,700,700italic,800,800italic,900,900italic' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
@@ -37,14 +37,14 @@
                 ga('send', 'pageview', location.href);
             }
         }
-        
+
         function trackEvent(eventCategory, eventAction, eventLabel, eventValue){
             if(gaId){
                 ga('send', 'event', eventCategory, eventAction, eventLabel, eventValue);
             }
         }
     </script>
-    
+
     <!-- facebook -->
     <script src="app/utils/fb.js"></script>
 
@@ -63,27 +63,26 @@
     <script src="bower_components/metrics-graphics/dist/metricsgraphics.min.js"></script>
     <script src="bower_components/mg-line-brushing/dist/mg_line_brushing.js"></script>
     <!-- /charts -->
-    
+
     <!-- html2canvas -->
     <script src="lib/html2canvas/html2canvas.js"></script>
     <!-- /html2canvas -->
-    
-    <!-- tabletop -->
-    <script src="bower_components/tabletop/src/tabletop.js"></script>
-    <script src="bower_components/angular-tabletop/TabletopProvider.js"></script>
-    <!-- /tabletop -->
-        
+
+    <!-- papaparse -->
+		<script src="bower_components/papaparse/papaparse.min.js"></script>
+		<script src="bower_components/angular-papaparse/dist/js/angular-PapaParse.js"></script>
+
     <!-- app -->
-    <script src="app/app.js?v201801111346"></script>
-    <script src="app/router.js?v201801111346"></script>
-    <script src="app/utils/date.js?v201801111346"></script>
-    <script src="app/services/server.js?v201801111346"></script>
-    <script src="app/services/uiBasic.js?v201801111346"></script>
-    <script src="app/controllers/mainController.js?v201801111346"></script>
+    <script src="app/app.js?v202108141700"></script>
+    <script src="app/router.js?v202108141700"></script>
+    <script src="app/utils/date.js?v202108141700"></script>
+    <script src="app/services/server.js?v202108141700"></script>
+    <script src="app/services/uiBasic.js?v202108141700"></script>
+    <script src="app/controllers/mainController.js?v202108141700"></script>
     <!-- /app -->
-    
+
     <div ng-view ng-cloak flex layout="column" style="z-index: 1;" class="client-window">
     </div>
-    
+
 </body>
 </html>

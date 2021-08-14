@@ -13,9 +13,9 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
         function loadData() {
             return $q(function(resolve, reject) {
                 $server.loadData()
-                    .then(function(tabletop) {
-                        var groups = tabletop.sheets('Groups').all();
-                        var activities = tabletop.sheets('Activities').all();
+                    .then(function(data) {
+                        var groups = data['Groups'];
+                        var activities = data['Activities'];
 
                         var tempGroups = [];
                         for (var i = 0; i < groups.length; i++) {
@@ -27,12 +27,33 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
                         for (var i = 0; i < activities.length; i++) {
                             tempGroups[activities[i].type].activities.push(activities[i]);
                             activities[i].colorbox = tempGroups[activities[i].type].colorbox;
+                            activities[i].footprint = parseInt(activities[i].footprint)
                         }
 
                         $scope.activityGroups = groups;
-                        $scope.resultInterpretation = tabletop.sheets('Result Interpretation').all();
-                        $scope.baselines = tabletop.sheets('Baselines').all();
-                        var settings = tabletop.sheets('Settings').all();
+                        $scope.resultInterpretation = data['Result Interpretation'].map(function(v) {
+                          return {
+                            ...v,
+                            lowerboundary: parseInt(v.lowerboundary),
+                            upperboundary: parseInt(v.upperboundary)
+                          }
+                        });
+                        $scope.baselines = data['Baselines'].map(function(v) {
+                          return {
+                            ...v,
+                            footprint: parseInt(v.footprint)
+                          }
+                        });
+                        var settings = data['Settings'];
+                        settings.map(function(v) {
+                          if (v.setting == 'unitHeight')
+                            return {
+                              ...v,
+                              value: parseInt(v.value)
+                            }
+                          else
+                            return v
+                        })
 
                         $scope.settings = [];
                         for (var i = 0; i < settings.length; i++)
@@ -45,7 +66,7 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
                             initTracking($scope.settings['googleAnalyticsID']);
                         }
                         resolve();
-                    }, function(tabletop) {
+                    }, function() {
                         reject('Failed to load data.');
                     });
             });
