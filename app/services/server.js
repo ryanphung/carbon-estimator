@@ -21,6 +21,7 @@ angular.module('app').factory('ServerService', ['$http', 'UiBasicService', '$q',
 
                     $papa.parse(url, {
                       download: true,
+                      dynamicTyping: true, // convert numeric
                       header: true,
                       transformHeader:function(h) {
                         return h.replace(/[^a-zA-Z0-9]/g, '') // remove special characters
