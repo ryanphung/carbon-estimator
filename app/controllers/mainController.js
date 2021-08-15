@@ -27,21 +27,21 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
                         for (var i = 0; i < activities.length; i++) {
                             tempGroups[activities[i].type].activities.push(activities[i]);
                             activities[i].colorbox = tempGroups[activities[i].type].colorbox;
-                            activities[i].footprint = parseFloat(activities[i].footprint)
+                            activities[i].footprint = activities[i].footprint
                         }
 
                         $scope.activityGroups = groups;
                         $scope.resultInterpretation = data['Result Interpretation'].map(function(v) {
                           return {
                             ...v,
-                            lowerboundary: parseFloat(v.lowerboundary),
-                            upperboundary: parseFloat(v.upperboundary)
+                            lowerboundary: v.lowerboundary,
+                            upperboundary: v.upperboundary
                           }
                         });
                         $scope.baselines = data['Baselines'].map(function(v) {
                           return {
                             ...v,
-                            footprint: parseFloat(v.footprint)
+                            footprint: v.footprint
                           }
                         });
                         var settings = data['Settings'];
@@ -49,7 +49,7 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
                           if (v.setting == 'unitHeight')
                             return {
                               ...v,
-                              value: parseFloat(v.value)
+                              value: v.value
                             }
                           else
                             return v
