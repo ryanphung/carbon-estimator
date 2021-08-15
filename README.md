@@ -27,10 +27,11 @@ The data is publicly available here: https://drive.google.com/open?id=1QC1qEfeDZ
 The tool relies on a single Google sheet for all its configuration. To create your own customisation:
 
 1. Duplicate the sample [Google sheet](https://drive.google.com/open?id=1NoSg0Sj_ZCcoYfZXMGxP0hcvFtipKUGZ5r0e6xPMrX0).
-1. Publish your new Google sheet: Google Sheet menu > File > Publish to the web. You'll get a link that look similar to this: `https://docs.google.com/spreadsheets/d/1NoSg0Sj_ZCcoYfZXMGxP0hcvFtipKUGZ5r0e6xPMrX0/pubhtml`
-1. Copy and paste the ID part of the URL (`1NoSg0Sj_ZCcoYfZXMGxP0hcvFtipKUGZ5r0e6xPMrX0`) into the file `app/server.js` and replace the ID on this line:
+1. Share your new Google sheet so that anyone with the link can view it: Google Sheet > Share button (top-right corner) > select "Change to anyone with this link" > Make sure to select "Viewer" > Done. You'll get a link that look similar to this: `https://docs.google.com/spreadsheets/d/1bkB-EjM2JhkSrU2aWTzw6HyscKDiK_N81tVk7_tv-P8/edit?usp=sharing`
+![alt text](./img/readme-googlesheet-sharing.png)
+1. Copy the ID part of the URL (`1bkB-EjM2JhkSrU2aWTzw6HyscKDiK_N81tVk7_tv-P8`) into the file `app/services/server.js` and replace the ID on this line:
 
-        const configGoogleSheetId = '1NoSg0Sj_ZCcoYfZXMGxP0hcvFtipKUGZ5r0e6xPMrX0'
+        const configGoogleSheetId = '1bkB-EjM2JhkSrU2aWTzw6HyscKDiK_N81tVk7_tv-P8'
 
 1. Now you can start modifying the configuration in the Google sheet according to your need, the modification will be available in the carbon estimator in a few minutes.
 
