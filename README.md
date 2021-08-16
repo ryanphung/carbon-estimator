@@ -61,7 +61,7 @@ To enable Facebook Share button in the page is a bit more complicated and you'll
 
 ## Current Usage
 
-* [Climate Reality Project Asia, Singapore](http://climaterealityproject.asia/)
+_To be updated..._
 
 Drop us a note at hello@whatismycarbonfootprint.com if you want your website to be listed here.
 
