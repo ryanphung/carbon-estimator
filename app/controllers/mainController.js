@@ -27,7 +27,6 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
                         for (var i = 0; i < activities.length; i++) {
                             tempGroups[activities[i].type].activities.push(activities[i]);
                             activities[i].colorbox = tempGroups[activities[i].type].colorbox;
-                            activities[i].footprint = activities[i].footprint
                         }
 
                         $scope.activityGroups = groups;
@@ -248,6 +247,8 @@ angular.module('app').controller('MainController', ['$scope', 'ServerService', '
 
                 $scope.selectedActivities.push(activity);
                 $scope.totalFootprint += activity.footprint;
+
+                $scope.totalFootprint = Math.round($scope.totalFootprint * 100000)/100000; // to avoid quirk with floating number representation
             }
 
             if (!activityGroup.completed) {
